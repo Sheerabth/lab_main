@@ -1,55 +1,59 @@
 #include<stdio.h>
-#include<stdlib.h>
 #include<string.h>
+
+void replaceSubstring(char [],char[],char[]);
+
 void main()
 {
-    int i,j,k,n1,n2,n,p,b=0;
-    char str[80],s1[10],s2[10];
-    printf("Enter the string:\n");
-    scanf("%[^\n]s",str);
-    printf("Enter the substring to be replaced:\n");
-    scanf("%*c%[^\n]s",s1);
-    printf("Enter the substring to replace:\n");
-    scanf("%*c%[^\n]s",s2);
-    n2=strlen(s2);
-    n=strlen(str);
-    n1=strlen(s1);
-    for(k=0;k<10;k++)
+    char string[100],sub[100],new_str[100];
+    printf("\nEnter a string: ");
+    gets(string);
+    printf("\nEnter the substring: ");
+    gets(sub);
+    printf("\nEnter the new substring: ");
+    gets(new_str);
+    replaceSubstring(string,sub,new_str);
+    printf("\nThe string after replacing : %s\n",string);
+}
+
+void replaceSubstring(char string[],char sub[],char new_str[])
+{
+    int stringLen,subLen,newLen;
+    int i=0,j,k;
+    int flag=0,start,end;
+    stringLen=strlen(string);
+    subLen=strlen(sub);
+    newLen=strlen(new_str);
+
+    for(i=0;i<stringLen;i++)
     {
-        for(i=0,j=0;i<n;i++)
+        flag=0;
+        start=i;
+        for(j=0;string[i]==sub[j];j++,i++)
         {
-            if(str[i]==s1[j])
+            if(j==subLen-1)
+            flag=1;
+        }
+        end=i;
+        if(flag==0)
+            i-=j;
+        else
+        {
+            for(j=start;j<end;j++)
             {
-                j++;
-                if(j==n1)
-                {
-                    p=i;
-                    break;
-                }
+                for(k=start;k<stringLen;k++)
+                    string[k]=string[k+1];
+                stringLen--;
+                i--;
             }
-            else
-            j=0;
+            for(j=start;j<start+newLen;j++)
+            {
+                for(k=stringLen;k>=j;k--)
+                    string[k+1]=string[k];
+                string[j]=new_str[j-start]; 
+                stringLen++;
+                i++;
+            }   
         }
-        if(j!=n1)
-            continue;
-        b=1;
-        if(n2>n1)
-        {
-            for(i=n-1;i>p;i--)
-                str[i+n2-n1]=str[i];
-        }
-        else if(n2<n1)
-        {
-            for(i=p+1;i<n;i++)
-                str[i-n1+n2]=str[i];
-        }
-        for(i=0;i<n2;i++)
-            str[i+p-n1+1]=s2[i];
-        n+=n2-n1;
-        str[n]='\0';
     }
-    if(b==0)
-        printf("The substring is not found\n");
-    else
-        printf("The modified string is %s\n",str);
 }

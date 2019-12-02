@@ -7,27 +7,6 @@ void main()
     printf("Enter the name(less than 80 charachters): ");
     scanf("%[^\n]s",name);
     n=strlen(name);
-    /*for(i=0;i<n;i++)
-    {
-        if(name[i]==' ')
-        {
-            p1=i+2;
-            break;
-        }
-    }
-    for(j=i+1;j<n;j++)
-    {
-        if(name[j]==' ')
-        {
-            p2=j;
-            for(k=0;j+k<n;k++)
-                name[p1+k]=name[j+k];
-            break;
-        }
-    }
-    n-=p2-p1;
-    name[n]='\0';
-    printf("The %s\n",name);*/
     printf("Short name is %c ",name[i]);
     for(i=0;i<n;i++)
     {
