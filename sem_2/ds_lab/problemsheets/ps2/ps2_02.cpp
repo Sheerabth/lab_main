@@ -1,40 +1,27 @@
 #include<iostream>
 using namespace std;
-
-
-void main()
+int main()
 {
-    int i,j,k,n,choice;
-    char ch;
-    cout<<"Enter the number of elements of the array\n";
-    cin>>n;
-    int *ar=new int[n];
-    cout<<"Enter the elements of the array";
-    for(i=0;i<n;i++)
+    int x,c_p=0,c_n=0,c_o=0,c_e=0,y,s_i=0,c_g=0,num,len,i,total=0;
+    float avg;
+    cout<<"Enter the number of elements: ";
+    cin>>len;
+    int *ar=new int[len];
+    cout<<"Enter the elements of the array:\n";
+    for(i=0;i<len;i++)
         cin>>ar[i];
-    do
+    for(i=0;i<len;i++)
+        total+=ar[i];
+    float avg=(float)total/len;
+    cout<<"The total is"<<total<<"\n";
+    cout<<"The average is"<<avg<<"\n";
+    cout<<"Enter the number: ";
+    cin>>num;
+    for(i=0;i<len;i++)
     {
-        cout<<"Select your choice\n";
-        cout<<"1.Insert an element at the beginning\n";
-        cout<<"2.Insert an element at the end\n";
-        cout<<"3.Insert an element at some index\n";
-        cout<<"4.Delete an element at some index\n";
-        cin>>choice;
-        if(choice==1)
-            ib(ar,n);
-        else if(choice==2)
-            ie(ar,n);
-        else if(choice==3)
-            in(ar,n);
-        else if(choice==4)
-            del(ar,n);
-        cout<<"The array after alteration is\n";
-        for(i=0;i<n;i++)
-            cout<<ar[i]<<"\n";
-        cout<<"Do you want to continue?(y/n)";
-        cin>>ch
-    } while (ch=='y'||ch=='Y');
-    
-   
+        if(ar[i]>=num)
+            c_g++;
+    }
+    cout<<c_g<<"numbers are greater than"<<num<<"\n";
     
 }

@@ -45,6 +45,7 @@ struct set merge(struct set &x,struct set &y)
             }
         }
     }
+    return z;
 }
 int main()
 {
