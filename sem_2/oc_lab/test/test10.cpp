@@ -44,6 +44,8 @@ int main()
 {
     Rectangle R1,R2;
     R1.setAtt();
+    cout<<"The area is: "<<R1.area()<<endl;
+    cout<<"The perimeter is: "<<R1.perimeter()<<endl;
 }
 
 
