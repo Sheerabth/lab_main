@@ -8,14 +8,14 @@ int main()
     cout<<"Enter the scores of 500 students:"<<endl;
     for(i=0;i<10;i++)
     {
-input:  cin>>temp_Score;
-        if(temp_Score<0||temp_Score>100)
+input:  cin>>tempScore;
+        if(tempScore<0||tempScore>100)
         {
             cout<<"Enter valid score:\n";
             goto input;
         }
-        else if(temp_Score>50)
-            score[temp_Score-50]++;
+        else if(tempScore>50)
+            score[tempScore-50]++;
     }
     cout<<"The result is:\n";
     for(i=0;i<50;i++)
