@@ -11,9 +11,7 @@ class sparseMatrix{
         void displaySparse();
         void displayTriple();
         void findTripleRep();
-        sparseMatrix transpose();
-        sparseMatrix tripleTranspose();
-
+        sparseMatrix addMatrix(sparseMatrix);
 };
 
 void sparseMatrix::read()
@@ -87,63 +85,74 @@ void sparseMatrix::findTripleRep()
     }
 }
 
-sparseMatrix sparseMatrix::transpose()
+sparseMatrix sparseMatrix::addMatrix(sparseMatrix s)
 {
-    sparseMatrix spar;
-    int i,j;
-    spar.row=col;
-    spar.col=row;
-    spar.nonZero=nonZero;
-    spar.sparse=(int **)calloc(spar.row,sizeof(int *));
-    for(int i=0;i<row;i++)
-        spar.sparse[i]=(int *)calloc(spar.col,sizeof(int));
-    for(i=0;i<row;i++)
-    {
-        for(j=0;j<col;j++)
-        {
-            spar.sparse[j][i]=sparse[i][j];
-        }
-    }
-    return spar;
-}
-
-sparseMatrix sparseMatrix::tripleTranspose()
-{
-
+    sparseMatrix sum;
     int i,j,k=1;
-    sparseMatrix tran;
-    tran.nonZero=nonZero;
-    tran.triple=(int **)calloc((tran.nonZero+1),sizeof(int *));
-    for(i=0;i<nonZero+1;i++)
-        tran.triple[i]=(int *)calloc(3,sizeof(int));
-    tran.triple[0][0]=col;
-    tran.triple[0][1]=row;
-    tran.triple[0][2]=nonZero;
-    for(i=0;i<col;i++)
+    sum.nonZero=nonZero+s.nonZero;
+    sum.triple=(int **)calloc((sum.nonZero+1),sizeof(int *));
+    for(i=0;i<sum.nonZero+1;i++)
+        sum.triple[i]=(int *)calloc(3,sizeof(int));
+    sum.triple[0][0]=row;
+    sum.triple[0][1]=col;
+    for(i=1,j=1;i<nonZero+1&&j<s.nonZero+1;)
     {
-        for(j=1;j<tran.nonZero+1;j++)
+        sum.triple[k][0]=triple[i][0];
+        if(triple[i][0]==s.triple[j][0])
         {
-            if(triple[j][1]==i)
-            {
-                tran.triple[k][0]=triple[j][1];
-                tran.triple[k][1]=triple[j][0];
-                tran.triple[k][2]=triple[j][2];
-                k++;
-            }
+            sum.triple[k][1]=triple[i][1];
+            sum.triple[k][2]=triple[i][2]+s.triple[j][2];
+            i++;
+            j++;
         }
+        else if(triple[i][1]<s.triple[j][1]||triple[i][0]<s.triple[j][0])
+        {
+            sum.triple[k][1]=triple[i][1];
+            sum.triple[k][2]=triple[i][2];
+            i++;
+        }
+        else
+        {
+            sum.triple[k][1]=s.triple[j][1];
+            sum.triple[k][2]=s.triple[j][2];
+            j++;
+        }
+        k++;
     }
-
-    return tran;
+    while(i<nonZero+1)
+    {
+        sum.triple[k][0]=triple[i][0];
+        sum.triple[k][1]=triple[i][1];
+        sum.triple[k][2]=triple[i][2];
+        i++;
+        k++;
+    }
+    while(j<s.nonZero+1)
+    {
+        sum.triple[k][0]=s.triple[j][0];
+        sum.triple[k][1]=s.triple[j][1];
+        sum.triple[k][2]=s.triple[j][2];
+        j++;
+        k++;
+    }
+    for(i=k;i<sum.nonZero+1;i++)
+        free(sum.triple[i]);
+    sum.triple=(int **)realloc(sum.triple,k*sizeof(int *));
+    sum.nonZero=k;
+    return sum;
 }
 
 int main()
 {
-    sparseMatrix s,tran,tripleTran;
-    s.read();
-    s.findTripleRep();
-    s.displayTriple();
-    tran=s.transpose();
-    tran.displaySparse();
-    tripleTran=s.tripleTranspose();
-    tripleTran.displayTriple();
+    sparseMatrix s1,s2,sum;
+    s1.read();
+    s2.read();
+    s1.displaySparse();
+    s2.displaySparse();
+    s1.findTripleRep();
+    s2.findTripleRep();
+    s1.displayTriple();
+    s2.displayTriple();
+    sum=s1.addMatrix(s2);
+    sum.displayTriple();
 }
