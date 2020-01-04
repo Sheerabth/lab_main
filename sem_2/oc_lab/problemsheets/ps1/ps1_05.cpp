@@ -19,9 +19,62 @@ void display(Vehicle);
 
 int main()
 {
-    
+    string manName;
+    bool flag=0;
+    int i,year,regNo;
+    Vehicle v[10];
+    cout<<"Enter the details of 10 vehicles:\n";
+    for(i=0;i<10;i++)
+    {
+        cout<<"Enter the details of vehicle "<<i+1<<endl;
+        read(&v[i]);
+    }
+    cout<<"Enter the year to be searched for: ";
+    cin>>year;
+    cout<<"The details of vehicles with given year as year of manufacturing are:\n";
+    for(i=0;i<10;i++)
+    {
+        if(v[i].yearOfMake==year)
+        {
+            flag=1;
+            cout<<"Vehicle "<<i+1<<endl;
+            display(v[i]);
+        }
+    }
+    if(!flag)
+        cout<<"There are no vehicles with the given year as year of manufacturing\n";
+    flag=0;
+    cout<<"Enter the manufacturer name: ";
+    cin.sync();
+    getline(cin,manName);
+    cout<<"The details of vehicles with given manufacturer name:\n";
+    for(i=0;i<10;i++)
+    {
+        if(manName.compare(v[i].manName)==0)
+        {
+            flag=1;
+            cout<<"Vehicle "<<i+1<<endl;
+            display(v[i]);
+        }
+    }
+    if(!flag)
+        cout<<"There are no vehicles with the given manufacturer name\n";
+    flag=0;
+    cout<<"Enter the registration number to be searched for: ";
+    cin>>regNo;
+    cout<<"The details of vehicles with given number as registration number are:\n";
+    for(i=0;i<10;i++)
+    {
+        if(v[i].regNo==regNo)
+        {
+            flag=1;
+            cout<<"Vehicle "<<i+1<<endl;
+            display(v[i]);
+        }
+    }
+    if(!flag)
+        cout<<"There are no vehicles with the given registration number\n";
 }
-
 void read(Vehicle *v)
 {
     cout<<"Enter the registration number: ";
