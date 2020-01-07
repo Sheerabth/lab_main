@@ -2,10 +2,12 @@
 using namespace std;
 
 template <typename T>
-void fibonacci(T t)
+
+void fibonacci(T x)
 {
     T a=-1,b=1,c=0;
-    for(T i=0;i<t;i++)
+    cout<<"Fibonacci ";
+    for(T i=0;i<x;i++)
     {
         c=a+b;
         cout<<c<<"\t";
@@ -15,11 +17,11 @@ void fibonacci(T t)
     cout<<endl;
 }
 
+template <typename L>
+
 int main()
 {
-    fibonacci<int>(34);
-    fibonacci<char>('F');
-    fibonacci<float>(8.93);
-    fibonacci<long>(10);
-    fibonacci<double>(4.567);
+    L n;
+    cout<<"Enter the number till which to generate fibonacci series: ";
+    cin>>n;
 }
