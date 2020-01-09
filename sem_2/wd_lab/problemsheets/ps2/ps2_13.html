@@ -1,15 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>ws2_13</title>
 </head>
+
 <body>
-    <audio controls>
-        <source src="audio/oneplus_tone.mp3" type="audio/mp3">
-      Your browser does not support the audio element.
-      </audio> 
+    <audio controls id="player">
+        <source src="audio/oneplus_tone.mp3" type="audio/mp3" autop>
+        Your browser does not support the audio element.
+    </audio>
+    <script>
+        var i = 0;
+        var files = [
+            "audio/oneplus_mclaren.mp3",
+            "audio/oneplus_rhythm.mp3",
+            "audio/oneplus_tune_remix.mp3"
+        ];
+        player = document.getElementById("player");
+        player.onended = function next() {
+            if (i < files.length) {
+                player.src = files[i];
+                player.autoplay = true;
+                i += 1;
+            }
+        }
+    </script>
 </body>
+
 </html>
