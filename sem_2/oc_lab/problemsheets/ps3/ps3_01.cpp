@@ -94,4 +94,17 @@ int largestPopulation(Country *C,int num)
     return count;
 }
 
-int 
+int largestPopulation(Country *C,int num)
+{
+    float maxPopulationDensity=0;
+    int count;
+    for(int i=0;i<num;i++)
+    {
+        if(C[i].returnArea()>maxPopulation)
+        {
+            maxPopulation=C[i].returnArea();
+            count=i;
+        }
+    }
+    return count;
+}
