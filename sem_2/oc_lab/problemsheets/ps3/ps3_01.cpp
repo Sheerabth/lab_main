@@ -13,13 +13,29 @@ class Country
         void read();
         void calculatePopulationDesnsity();
         void display();
-        int returnPopulation();
-        float returnArea();
+        int getPopulation();
+        float getArea();
+        float getpopulationDensity();
 };
 
 int largestArea(Country *,int);
 int largestPopulation(Country *,int);
 int largestPopulationDensity(Country *,int);
+
+int Country::getPopulation()
+{
+    return population;
+}
+
+float Country::getArea()
+{
+    return area;
+}
+
+float Country::getpopulationDensity()
+{
+    return populationDensity;
+}
 
 void Country::read()
 {
@@ -70,9 +86,9 @@ int largestArea(Country *C,int num)
     int count;
     for(int i=0;i<num;i++)
     {
-        if(C[i].returnArea()>maxArea)
+        if(C[i].getArea()>maxArea)
         {
-            maxArea=C[i].returnArea();
+            maxArea=C[i].getArea();
             count=i;
         }
     }
@@ -85,24 +101,24 @@ int largestPopulation(Country *C,int num)
     int count;
     for(int i=0;i<num;i++)
     {
-        if(C[i].returnArea()>maxPopulation)
+        if(C[i].getPopulation()>maxPopulation)
         {
-            maxPopulation=C[i].returnArea();
+            maxPopulation=C[i].getPopulation();
             count=i;
         }
     }
     return count;
 }
 
-int largestPopulation(Country *C,int num)
+int largestPopulationDensity(Country *C,int num)
 {
     float maxPopulationDensity=0;
     int count;
     for(int i=0;i<num;i++)
     {
-        if(C[i].returnArea()>maxPopulation)
+        if(C[i].getpopulationDensity()>maxPopulationDensity)
         {
-            maxPopulation=C[i].returnArea();
+            maxPopulationDensity=C[i].getpopulationDensity();
             count=i;
         }
     }
