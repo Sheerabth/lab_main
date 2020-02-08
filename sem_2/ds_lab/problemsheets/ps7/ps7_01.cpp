@@ -174,4 +174,5 @@ bool SinglyLinked<T>::display()
 
 int main()
 {
+    /* code */
 }
