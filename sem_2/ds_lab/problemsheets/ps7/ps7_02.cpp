@@ -9,7 +9,7 @@ class Node{
     T data;
     Node<T> *next;
     Node<T> *prev; 
-    friend DoublyLinked;
+    friend DoublyLinked<T>;
     public:
         Node<T>() : data(0), next(NULL), prev(NULL) {}
         Node<T>(T element) : data(element), next(NULL), prev(NULL) {}
@@ -35,12 +35,12 @@ class DoublyLinked{
 template <class T>
 bool DoublyLinked<T>::insBeg(Node<T> node)
 {
+    Node<T> *ptr = new Node<T>(node);
     if(head == NULL)
     {
-        cout << "Linked list is empty\n";
+        head = ptr;
         return 0;
     }
-    Node<T> *ptr = new Node<T>(node);
     head->prev = ptr;
     ptr->next = head;
     head = ptr;
@@ -72,9 +72,9 @@ bool DoublyLinked<T>::insMidBef(Node<T> element, Node<T> node)
         ptr->prev = t->prev;
         ptr->next = t;
         if(t == head)
-            head = head->prev;
+            head = ptr;
         else
-            t->prev->next = ptr;
+            ptr->prev->next = ptr;
         t->prev = ptr;
     }
     else
@@ -118,14 +118,14 @@ bool DoublyLinked<T>::insMidAft(Node<T> element, Node<T> node)
 template <class T>
 bool DoublyLinked<T>::insEnd(Node<T> node)
 {
+    Node<T> *ptr = new Node<T>(node);
     if(head == NULL)
     {
-        cout << "Linked list is empty\n";
+        head = ptr; 
         return 0;
     }
-    Node<T> *ptr = new Node<T>(node);
-    Node *t = head;
-    while(t != NULL)
+    Node<T> *t = head;
+    while(t->next != NULL)
     {
         t = t->next;
     }
@@ -258,5 +258,17 @@ bool DoublyLinked<T>::display()
 
 int main()
 {
+    DoublyLinked<int> D;
+    D.insEnd(80);
+    D.insBeg(50);
+    D.insBeg(5);
+    D.insEnd(10);
+    D.display();
+    D.insMidBef(5,15);
+    D.display();
+    D.insMidAft(5,90);
+    D.display();
+    D.delEnd();
+    D.display();
     /* code */
 }

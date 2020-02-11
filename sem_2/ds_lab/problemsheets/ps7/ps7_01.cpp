@@ -9,7 +9,7 @@ class Node
 {
     T data;
     Node<T> *next;
-    friend Singly;
+    friend SinglyLinked<T>;
 
 public:
     Node<T>() : data(0), next(NULL) {}
@@ -126,9 +126,12 @@ bool SinglyLinked<T>::delMid(Node<T> element)
     }
     if(found)
     {
-        delete t->next;
-        t->next = NULL;
+        Node<T> *s = t->next;
+        t->next = t->next->next;
+        delete s;
     }
+    else
+        cout << "Element not found or cannot delete element\n";
     return 0;
 }
 
@@ -147,9 +150,9 @@ bool SinglyLinked<T>::delEnd()
         delete t;
         return 0;
     }
-    while(t->next->next == NULL)
+    while(t->next->next != NULL)
     {
-        t = t->NULL;
+        t = t->next;
     }
     delete t->next;
     t->next = NULL;
@@ -167,12 +170,26 @@ bool SinglyLinked<T>::display()
     cout << "The list contents are: \n";
     while(t != NULL)
     {
-        cout << t->data << "\t";    
+        cout << t->data << "\t";  
+        t = t->next;  
     }
     cout << endl;
 }
 
 int main()
 {
+    SinglyLinked <int>S;
+    S.insBeg(5);
+    S.insEnd(10);
+    S.insMid(5,6);
+    S.insMid(6,7);
+    S.insMid(5,8);
+    S.display();
+    S.delEnd();
+    S.display();
+    S.delMid(6);
+    S.display();
+    S.delBeg();
+    S.display();
     /* code */
 }
