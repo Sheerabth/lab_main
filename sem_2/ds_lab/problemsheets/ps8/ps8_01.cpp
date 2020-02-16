@@ -25,7 +25,7 @@ class SinglyLinked
 public:
     SinglyLinked<T>() : head(NULL) {}
     SinglyLinked<T>(const SinglyLinked<T> &); //
-    void operator=(const SinglyLinked<T> &);  //
+    SinglyLinked<T>& operator=(const SinglyLinked<T> &);  //
 
     int noOfElements(); //
     bool display();     //
@@ -70,7 +70,7 @@ SinglyLinked<T>::SinglyLinked<T>(const SinglyLinked<T> &S)
 }
 
 template <class T>
-void SinglyLinked<T>::operator=(const SinglyLinked<T> &S)
+SinglyLinked<T>& SinglyLinked<T>::operator=(const SinglyLinked<T> &S)
 {
     free();
     Node<T> *t1 = S.head;
@@ -86,6 +86,7 @@ void SinglyLinked<T>::operator=(const SinglyLinked<T> &S)
         t2 = temp;
         t1 = t1->next;
     }
+    return *this;
 }
 
 template <class T>
