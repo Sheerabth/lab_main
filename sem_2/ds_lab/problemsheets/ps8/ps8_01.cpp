@@ -24,68 +24,119 @@ class SinglyLinked
 
 public:
     SinglyLinked<T>() : head(NULL) {}
-    SinglyLinked<T>(SinglyLinked<T>&);
-    SinglyLinked<T> operator +(SinglyLinked<T>);
-    SinglyLinked<T> operator =(SinglyLinked<T>);
+    SinglyLinked<T>(const SinglyLinked<T> &); //
+    void operator=(const SinglyLinked<T> &);  //
 
-    int noOfElements();
-    bool display();
-    bool delMid(Node<T>);
-    bool free();
+    int noOfElements(); //
+    bool display();     //
+    void free();        //
 
-    void append(Node<T>);
-    T sum();
-    bool sort();
-    bool delEnd();
+    void append(Node<T>); //
+    T sumOfElements();    //
+    bool sort();    //
+    bool delEnd();  //
+    bool reverse();
     bool delSecond();
-    bool deleteNth(int);
-    bool move(Node<T>,int);
-    bool insertAfterNth(Node<T>,int);
-    bool reverse(SinglyLinked<T>&);
-    SinglyLinked<T>& combine(SinglyLinked<T>&);
-    SinglyLinked<T>& union_(const SinglyLinked<T>&);
-    SinglyLinked<T>& intersection(const SinglyLinked<T>&);
+    bool deleteNth(int);    //
+    bool move(Node<T>, int);
+    bool insertAfterNth(Node<T>, int);  //
+    bool concatenate(SinglyLinked<T> &);
+    SinglyLinked<T> &combine(SinglyLinked<T> &);
+    SinglyLinked<T> &union_(const SinglyLinked<T> &);
+    SinglyLinked<T> &intersection(const SinglyLinked<T> &);
 };
 
 template <class T>
-bool SinglyLinked<T>::insertAfterNth(Node<T> node, int pos)
+SinglyLinked<T>::SinglyLinked<T>(const SinglyLinked<T> &S)
 {
-    Node<T> *ptr = new Node<T>(node);
-    Node<T> *t = head;
-    bool found = false;
-    int count = 0;
-    if (head == NULL)
-    {
-        cout << "Linked list is empty\n";
-        return -1;
-    }
-    while (t != NULL)
-    {
-        if(count == pos)
-        {
-            found = true;
-            break;
-        }
-        t = t->next;
-        count++;
-    }
-    if(found)
-    {
-        ptr->next = t->next;
-        t->next = ptr;
-    }
+    if (S.head == NULL)
+        head = NULL;
     else
     {
-        cout << "Invalid position\n";
+        Node<T> *t1 = S.head;
+        Node<T> *t2 = head;
+        while (t1 != NULL)
+        {
+            Node<T> *temp = new Node<T>();
+            temp->data = t1->data;
+            if (t2 == head)
+                head = temp;
+            else
+                t2->next = temp;
+            t2 = temp;
+            t1 = t1->next;
+        }
+    }
+}
+
+template <class T>
+void SinglyLinked<T>::operator=(const SinglyLinked<T> &S)
+{
+    free();
+    Node<T> *t1 = S.head;
+    Node<T> *t2 = head;
+    while (t1 != NULL)
+    {
+        Node<T> *temp = new Node<T>();
+        temp->data = t1->data;
+        if (t2 == head)
+            head = temp;
+        else
+            t2->next = temp;
+        t2 = temp;
+        t1 = t1->next;
+    }
+}
+
+template <class T>
+int SinglyLinked<T>::noOfElements()
+{
+    int count = 0;
+    Node<T> *t = head;
+    while (t != NULL)
+    {
+        count++;
+        t = t->next;
+    }
+    return count;
+}
+
+template <class T>
+bool SinglyLinked<T>::display()
+{
+    if (head == NULL)
+    {
+        cout << "The linked list is empty \n";
         return -1;
     }
+    Node<T> *t = head;
+    cout << "The elements of the linked list are: \n";
+    while (t != NULL)
+    {
+        cout << t->data << "\t";
+        t = t->next;
+    }
+    cout << endl;
     return 0;
+}
+
+template <class T>
+void SinglyLinked<T>::free()
+{
+    Node<T> *t = head;
+    while (t != NULL)
+    {
+        Node<T> *s = t;
+        delete s;
+        t = t->next;
+    }
+    head = NULL;
 }
 
 template <class T>
 void SinglyLinked<T>::append(Node<T> node)
 {
-    Node<T> *ptr=new Node<T>(node);
+    Node<T> *ptr = new Node<T>(node);
     Node<T> *t = head;
     if (head == NULL)
     {
@@ -103,32 +154,102 @@ void SinglyLinked<T>::append(Node<T> node)
 }
 
 template <class T>
-bool SinglyLinked<T>::delMid(Node<T> element)
+T SinglyLinked<T>::sumOfElements()
 {
-    bool found = false;
+    T sum = 0;
+    if (head == NULL)
+        cout << "The list is empty \n";
+    else
+    {
+        Node<T> *t = head;
+        while (t != NULL)
+        {
+            sum += t->data;
+            t = t->next;
+        }
+    }
+    return sum;
+}
+
+template <class T>
+bool SinglyLinked<T>::sort()
+{
     if(head == NULL)
     {
-        cout << "Linked list is empty\n";
+        cout << "List is empty \n";
+        return -1;
+    }
+    T temp;
+    Node *t = head;
+    for(Node<T> *i = head; i->next != NULL; i = i->next)
+    {
+        for(Node<T> *j = i->next; j != NULL; j = j->next)
+        {
+            if(i->data > j->data)
+            {
+                temp = i->data;
+                i->data = j->data;
+                j->data = temp;
+            }
+        }
+    }
+}
+
+template <class T>
+bool SinglyLinked<T>::delEnd()
+{
+    if (head == NULL)
+    {
+        cout << "The linked list is empty\n";
         return 0;
     }
-    Node<T> *t=head;
-    while(t->next != NULL)
+    Node<T> *t = head;
+    if (t->next == NULL)
     {
-        if(t->data == element.data)
+        head = NULL;
+        delete t;
+        return 0;
+    }
+    while (t->next->next != NULL)
+    {
+        t = t->next;
+    }
+    delete t->next;
+    t->next = NULL;
+}
+
+template <class T>
+bool SinglyLinked<T>::insertAfterNth(Node<T> node, int pos)
+{
+    Node<T> *ptr = new Node<T>(node);
+    Node<T> *t = head;
+    bool found = false;
+    int count = 0;
+    if (head == NULL)
+    {
+        cout << "Linked list is empty\n";
+        return -1;
+    }
+    while (t != NULL)
+    {
+        if (count == pos)
         {
             found = true;
             break;
         }
         t = t->next;
+        count++;
     }
-    if(found)
+    if (found)
     {
-        Node<T> *s = t->next;
-        t->next = t->next->next;
-        delete s;
+        ptr->next = t->next;
+        t->next = ptr;
     }
     else
-        cout << "Element not found or cannot delete element \n";
+    {
+        cout << "Invalid position\n";
+        return -1;
+    }
     return 0;
 }
 
@@ -137,28 +258,28 @@ bool SinglyLinked<T>::deleteNth(int pos)
 {
     bool found = false;
     count = 1;
-    if(head == NULL)
+    if (head == NULL)
     {
         cout << "Linked list is empty \n";
         return -1;
     }
-    Node<T> *t=head;
-    while(t->next != NULL)
+    Node<T> *t = head;
+    while (t->next != NULL)
     {
-        if(count == pos-1)
+        if (count == pos - 1)
         {
             found = true;
             break;
         }
         t = t->next;
     }
-    if(found)
+    if (found)
     {
         Node<T> *s = t->next;
         t->next = t->next->next;
         delete s;
     }
-    else if(count == 1)
+    else if (count == 1)
     {
         delete t;
         head = NULL;
@@ -171,56 +292,14 @@ bool SinglyLinked<T>::deleteNth(int pos)
     return 0;
 }
 
-
-template <class T>
-bool SinglyLinked<T>::delEnd()
-{
-    if(head == NULL)
-    {
-        cout << "The linked list is empty\n";
-        return 0;
-    }
-    Node<T> *t = head;
-    if(t->next == NULL)
-    {
-        head = NULL;
-        delete t;
-        return 0;
-    }
-    while(t->next->next != NULL)
-    {
-        t = t->next;
-    }
-    delete t->next;
-    t->next = NULL;
-}
-
-template <class T>
-bool SinglyLinked<T>::display()
-{
-    if(head == NULL)
-    {
-        cout << "The linked list is empty\n";
-        return 0;
-    }
-    Node<T> *t=head;
-    cout << "The list contents are: \n";
-    while(t != NULL)
-    {
-        cout << t->data << "\t";  
-        t = t->next;  
-    }
-    cout << endl;
-}
-
 int main()
 {
-    SinglyLinked <int>S;
+    SinglyLinked<int> S;
     S.insBeg(5);
     S.insEnd(10);
-    S.insMid(5,6);
-    S.insMid(6,7);
-    S.insMid(5,8);
+    S.insMid(5, 6);
+    S.insMid(6, 7);
+    S.insMid(5, 8);
     S.display();
     S.delEnd();
     S.display();
