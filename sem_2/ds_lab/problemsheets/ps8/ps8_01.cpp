@@ -28,15 +28,16 @@ public:
     SinglyLinked<T>& operator=(const SinglyLinked<T> &);  //
 
     int noOfElements(); //
-    bool display();     //
-    void free();        //
+    bool display(); //
+    void free();    //
 
-    void append(Node<T>); //
-    T sumOfElements();    //
+    void append(Node<T>);   //
+    T sumOfElements();  //
     bool sort();    //
     bool delEnd();  //
-    bool reverse();
-    bool delSecond();
+    bool reverse(); //
+    bool delSecond();   //
+    bool delEveryNth(int);  //
     bool deleteNth(int);    //
     bool move(Node<T>, int);
     bool insertAfterNth(Node<T>, int);  //
@@ -220,6 +221,76 @@ bool SinglyLinked<T>::delEnd()
 }
 
 template <class T>
+bool SinglyLinked<T>::reverse()
+{
+    
+    if(head == NULL)
+    {
+        cout << "List is empty \n";
+        return -1;
+    }
+    else if(head->next == NULL)
+    {
+        cout << "Single element. No effect due to reversal \n";
+        return 0;
+    }
+    Node<T> *t1 = head;
+    Node<T> *t2 = t1->next;
+    Node<T> *t3; 
+    t1->next = NULL;
+    while(t3 != NULL)
+    {
+        t3 = t2->next;
+        t2->next = t1;
+        t1 = t2;
+        t2 = t3;
+    }
+    return 0;
+}
+
+template <class T>
+bool SinglyLinked<T>::delSecond()
+{
+    delEveryNth(2);
+}
+
+template <class T>
+bool SinglyLinked<T>::delEveryNth(int pos)
+{
+    if(head == NULL)
+    {
+        cout << "List is empty \n";
+        return -1;
+    }
+    else if(head->next == NULL && pos == 1)
+    {
+        delete head;
+        head = NULL;
+        return 0;
+    }
+    else if(pos == 1)
+    {
+        free();
+        return 0;
+    }
+    Node<T> *t = head;
+    Node<T> *s;
+    int count = 2;
+    while(t->next != NULL)
+    {
+        if(count % pos == 0)
+        {
+            s = t->next;
+            t->next = s->next;
+            delete s;
+        }
+        t = t->next;
+        count++;
+    }
+    return 0;
+}
+
+template <class T>
 bool SinglyLinked<T>::insertAfterNth(Node<T> node, int pos)
 {
     Node<T> *ptr = new Node<T>(node);
@@ -291,6 +362,20 @@ bool SinglyLinked<T>::deleteNth(int pos)
         return -1;
     }
     return 0;
+}
+
+template <class T>
+bool concatenate(SinglyLinked<T> &S)
+{
+    Node<T> *t = head;
+    if(head == NULL)
+    {
+        head = S.head;
+        return 0;
+    }
+    while(t->next != NULL)
+        t = t->next;
+    t->next = S.head
 }
 
 int main()
