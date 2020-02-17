@@ -39,9 +39,9 @@ public:
     bool delSecond();   //
     bool delEveryNth(int);  //
     bool deleteNth(int);    //
-    bool move(Node<T>, int);
+    bool move(int, int);    //
     bool insertAfterNth(Node<T>, int);  //
-    bool concatenate(SinglyLinked<T> &);
+    bool concatenate(SinglyLinked<T> &);    //
     SinglyLinked<T> &combine(SinglyLinked<T> &);
     SinglyLinked<T> &union_(const SinglyLinked<T> &);
     SinglyLinked<T> &intersection(const SinglyLinked<T> &);
@@ -326,6 +326,29 @@ bool SinglyLinked<T>::insertAfterNth(Node<T> node, int pos)
 }
 
 template <class T>
+bool move(int pos1, int pos2)    
+{
+    if(head == NULL)
+    {
+        cout << "List is full \n";
+        return -1;
+    }
+    int count = 0;
+    Node<T> *t = head, *temp;
+    while(t != NULL)
+    {
+        if(count == pos1 - 1)
+        {
+            temp = t->next;
+            t->next = t->next->next;
+            temp->next = NULL;
+        }
+        t = t->next;
+    }
+    insertAfterNth(temp->data, pos2);
+}
+
+template <class T>
 bool SinglyLinked<T>::deleteNth(int pos)
 {
     bool found = false;
@@ -376,6 +399,24 @@ bool concatenate(SinglyLinked<T> &S)
     while(t->next != NULL)
         t = t->next;
     t->next = S.head
+}
+
+template <class T>
+SinglyLinked<T> &combine(SinglyLinked<T> &S)
+{
+    
+}
+
+template <class T>
+SinglyLinked<T> &union_(const SinglyLinked<T> &)
+{
+
+}
+
+template <class T>
+SinglyLinked<T> &intersection(const SinglyLinked<T> &)
+{
+
 }
 
 int main()
