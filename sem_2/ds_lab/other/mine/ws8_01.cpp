@@ -60,7 +60,7 @@ SinglyLinked<T>::SinglyLinked<T>(const SinglyLinked<T> &S)
         {
             Node<T> *temp = new Node<T>();
             temp->data = t1->data;
-            if (head == NULL)
+            if (t2 == head)
                 head = temp;
             else
                 t2->next = temp;
@@ -262,31 +262,30 @@ bool SinglyLinked<T>::delEveryNth(int pos)
         cout << "List is empty \n";
         return -1;
     }
+    else if(head->next == NULL && pos == 1)
+    {
+        delete head;
+        head = NULL;
+        return 0;
+    }
     else if(pos == 1)
     {
         free();
         return 0;
     }
-    bool found = false;
     Node<T> *t = head;
     Node<T> *s;
-    int count = 1;
+    int count = 2;
     while(t->next != NULL)
     {
-        if((count + 1) % pos == 0)
+        if(count % pos == 0)
         {
-            found = true;
             s = t->next;
             t->next = s->next;
             delete s;
         }
         t = t->next;
         count++;
-    }
-    if(!found)
-    {
-        cout << "Invalid position \n";
-        return -1;
     }
     return 0;
 }
@@ -297,12 +296,12 @@ bool SinglyLinked<T>::insertAfterNth(Node<T> node, int pos)
     Node<T> *ptr = new Node<T>(node);
     Node<T> *t = head;
     bool found = false;
+    int count = 0;
     if (head == NULL)
     {
         cout << "Linked list is empty\n";
         return -1;
     }
-    int count = 1;
     while (t != NULL)
     {
         if (count == pos)
@@ -329,28 +328,24 @@ bool SinglyLinked<T>::insertAfterNth(Node<T> node, int pos)
 template <class T>
 bool move(int pos1, int pos2)    
 {
-    bool found = false;
     if(head == NULL)
     {
         cout << "List is full \n";
         return -1;
     }
-    int count = 1;
+    int count = 0;
     Node<T> *t = head, *temp;
-    while(t->next != NULL)
+    while(t != NULL)
     {
         if(count == pos1 - 1)
         {
-            found = true;
             temp = t->next;
             t->next = t->next->next;
             temp->next = NULL;
-            break;
         }
-        count++;
         t = t->next;
     }
-    insertAfterNth(temp->data, pos1 + pos2 - 1);
+    insertAfterNth(temp->data, pos2);
 }
 
 template <class T>
@@ -394,19 +389,16 @@ bool SinglyLinked<T>::deleteNth(int pos)
 
 template <class T>
 bool concatenate(SinglyLinked<T> &S)
-{ 
-    SinglyLined<T> *temp = new SinglyLinked<T>();
-    *temp = S; 
+{
     Node<T> *t = head;
     if(head == NULL)
     {
-        head = temp->head;
+        head = S.head;
         return 0;
     }
     while(t->next != NULL)
         t = t->next;
-    t->next = temp->head;
-    return 0;
+    t->next = S.head
 }
 
 template <class T>
@@ -416,44 +408,13 @@ SinglyLinked<T> &combine(SinglyLinked<T> &S)
 }
 
 template <class T>
-SinglyLinked<T> &union_(const SinglyLinked<T> &S)
+SinglyLinked<T> &union_(const SinglyLinked<T> &)
 {
-    SinglyLinked<T> *result = new SinglyLinked<T>();
-    this->sort();
-    S.sort();
-    Node<T> *t1 = head;
-    Node<T> *t2 = S.head;
-    Node<T> *t3 = result->head;
-    while(t1 != NULL || t2 != NULL)   
-    {
-        Node<T> *temp = new Node<T>();
-        if(t1->data < t2->data)
-        {
-            temp->data = t1->data;
-            t1 = t->next;
-        }
-        else if(t2->data < t1->data)
-        {
-            temp->data = t2->data;
-            t2 = t2->next;
-        }
-        else
-        {
-            temp->data = t1->data;
-            t1 = t1->next;
-            t2 = t2->next;
-        }
-        if(result->head == NULL)
-            result->head = temp;
-        else
-            t3->next = temp;
-        t3 = temp;
-    } 
-    return *result;
+
 }
 
 template <class T>
-SinglyLinked<T> &intersection(const SinglyLinked<T> &S)
+SinglyLinked<T> &intersection(const SinglyLinked<T> &)
 {
 
 }
