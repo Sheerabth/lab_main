@@ -6,67 +6,76 @@
     <title>Document</title>
 </head>
 <body>
-    <table id="myTable">
-        <tr>
-            <td>Product Number</td>
-            <td>Quantity</td>
-            <td>Retail Price</td>
-        </tr>
-    </table>
+    <table id="myTable"></table>
+    <p id = "errorResult"></p>
     <script>
-        var prodNo,result;
-        var retail = new Array(2.98, 4.5, 9.98, 4.49, 6.87);
-        var quantity = 0;
+        var headRow = ["Product Number", "Quantity", "Result"];
+        
         var tab = document.getElementById("myTable");
-        function calculate(prodNo,quantity)
+        
+        var row = document.createElement("tr");
+
+        for(i = 0; i<3 ; i++)
         {
-            var result;
-            switch(prodNo)
-            {
-                case 1: re quantity*retail[0];
-                        break;
-                case 2: return quantity*retail[1];
-                        break;
-                case 3: return quantity*retail[2];
-                        break;
-                case 4: return quantity*retail[3];
-                        break;
-                case 5: return quantity*retail[4];
-                        break;
-            }
+            var dat = document.createElement("td");
+            var node = document.createTextNode(headRow[i]);
+            dat.appendChild(node);
+            row.appendChild(dat);
         }
-        var result;
-        while(quantity != -1)
+        
+        tab.appendChild(row);
+        
+        var dataRow = [0,0,0];
+        var retail = [2.98, 4.5, 9.98, 4.49, 6.87];
+        var flag = true;
+        var count = 1;
+        while(count)
         {
-            var row = document.createElement("tr");
-            prodNo = prompt("Enter the product number");
-            if(prodNo == -1)
+            dataRow[0] = parseInt(prompt("Enter the product number"));
+            
+            if(dataRow[0] == -1)
+            {
+                flag = false;
                 break;
+            }
             
-            quantity = prompt("Enter the quantity of product");
-            
-            result = calculate(prodNo,quantity);
-            if(result == -1)
+            else if(dataRow[0] != 1 && dataRow[0] != 2 && dataRow[0] != 3 && dataRow[0] != 4 && dataRow[0] != 5)
             {
                 alert("Invalid product number");
                 continue;
             }
 
-            var dat = document.createElement("td");
-            var node = document.createTextNode(prodNo);
-            dat.appendChild(node);
-            row.appendChild(dat);
-            var dat = document.createElement("td");
-            var node = document.createTextNode(quantity);
-            dat.appendChild(node);
-            row.appendChild(dat);
-            var dat = document.createElement("td");
-            var node = document.createTextNode(result);
-            dat.appendChild(node);
-            row.appendChild(dat);
+            dataRow[1] = parseInt(prompt("Enter the quantity of product"));
+            
+            if(dataRow[1] <= 0)
+            {
+                alert("Invalid quantity");
+                continue;
+            }
+
+
+            dataRow[2] = dataRow[1]*retail[dataRow[0]-1];
+
+            var row = document.createElement("tr");
+
+            for(i = 0; i<3 ; i++)
+            {
+                var dat = document.createElement("td");
+                var node = document.createTextNode(dataRow[i]);
+                dat.appendChild(node);
+                row.appendChild(dat);
+            }
+            
             tab.appendChild(row);
+
+            count++;
         }    
-        console.log(result);
+
+        if(count == 1)
+        {
+            document.getElementById("myTable").style.display = "none";
+            document.getElementById("errorResult").innerHTML = "No proper Inputs";
+        }
     </script>
 </body>
 </html>
