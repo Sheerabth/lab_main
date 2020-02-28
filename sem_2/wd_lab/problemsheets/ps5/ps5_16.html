@@ -27,17 +27,13 @@
         
         var dataRow = [0,0,0];
         var retail = [2.98, 4.5, 9.98, 4.49, 6.87];
-        var flag = true;
         var count = 1;
         while(count)
         {
             dataRow[0] = parseInt(prompt("Enter the product number"));
             
             if(dataRow[0] == -1)
-            {
-                flag = false;
                 break;
-            }
             
             else if(dataRow[0] != 1 && dataRow[0] != 2 && dataRow[0] != 3 && dataRow[0] != 4 && dataRow[0] != 5)
             {
@@ -76,6 +72,7 @@
             document.getElementById("myTable").style.display = "none";
             document.getElementById("errorResult").innerHTML = "No proper Inputs";
         }
+
     </script>
 </body>
 </html>

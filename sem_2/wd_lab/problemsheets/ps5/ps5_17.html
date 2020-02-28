@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table id = "myTable"></table>
+    <p id = "errorText"></p>
+    <script>
+        var tab = document.getElementById("myTable");
+
+        var headRow = ["Employee Number", "Hours Worked", "Hourly Rate", "Gross Pay"];
+
+        var row = document.createElement("tr");
+        for(i = 0; i < 4; i++)
+        {
+            var data = document.createElement("th");
+            var node = document.createTextNode(headRow[i]);       
+            data.appendChild(node);
+            row.appendChild(data); 
+        }    
+        tab.appendChild(row);
+        var count = 1;
+        
+
+        while(count)
+        {
+            var dataRow = [0,0,0,0];
+            dataRow[0] = parseInt(prompt("Enter the Employee Number"));
+            if(dataRow[0] == -1)
+                break;
+            else if(dataRow[0] <= 0)
+            {
+                alert("Invalid Employee Number");
+                continue;
+            }
+            dataRow[1] = parseInt(prompt("Enter the Hours Worked"));
+            if(dataRow[1] < 0)
+            {
+                alert("Invalid hours worked");
+                continue;
+            }
+            dataRow[2] = parseInt(prompt("Enter Hourly Rate of the employee"));
+            if(dataRow[2] < 0)
+            {
+                alert("Invalid hourly rate");
+                continue;
+            }
+            if(dataRow[1] <= 40)
+                dataRow[3] = dataRow[1] * dataRow[2];
+            else
+            {
+                dataRow[3] = 40 * dataRow[2];
+                dataRow[3] += 1.5 * (dataRow[2] - 40);
+            }
+
+            var row = document.createElement("tr");
+            for(i = 0; i < 4; i++)
+            {
+                var data = document.createElement("td");
+                var node = document.createTextNode(dataRow[i]);
+                data.appendChild(node);
+                row.appendChild(data);
+            }
+            tab.appendChild(row);
+            count++;
+        }
+        if(count == 1)
+        {
+            document.getElementById("myTable").style.display = "none";
+            document.getElementById("errorText").innerHtml = "No valid inputs";
+        }
+    </script>
+</body>
+</html>
