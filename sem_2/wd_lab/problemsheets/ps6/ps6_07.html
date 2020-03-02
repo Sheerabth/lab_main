@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function calculateCharges(hours)
+        {   
+            if(hours <= 3)
+                return 2;
+            else
+            {
+                var result = 2 + 0.5*(hours - 3);
+                if(result <= 10)
+                    return result;
+                else
+                    return 10;
+            } 
+        }
+
+        function callback()
+        {
+            var hours = parseInt(document.getElementById("in").value);
+            var result = calculateCharges(hours);
+            document.getElementById("result").innerHTML = "The cost of parking is " + result;
+        }
+    </script>
+</head>
+<body>
+    <p>Enter the parking hours</p>
+    <input onkeypress = callback() type="text" id="in">
+    <p id="result"></p>
+</body>
+</html>
