@@ -513,7 +513,10 @@ SinglyLinked<T> &union_(const SinglyLinked<T> &S)
         Node<T> *temp = new Node<T>();
         temp->data = t1->data;
         t1 = t1->next;
-        t3->next = temp;
+        if (result->head == NULL)
+            result->head = temp;
+        else
+            t3->next = temp;
         t3 = temp;
     }
     while(t2 != NULL)
@@ -521,7 +524,10 @@ SinglyLinked<T> &union_(const SinglyLinked<T> &S)
         Node<T> *temp = new Node<T>();
         temp->data = t2->data;
         t2 = t2->next;
-        t3->next = temp;
+        if (result->head == NULL)
+            result->head = temp;
+        else
+            t3->next = temp;
         t3 = temp;
     }
     return *result;

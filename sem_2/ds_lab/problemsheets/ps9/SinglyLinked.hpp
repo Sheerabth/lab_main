@@ -32,7 +32,10 @@ public:
     bool delMid(Node);
     bool delEnd();
     bool display();
-    friend SinglyLinked*& FrontBackSplit(SinglyLinked &);
+    void FrontBackSplit();
+    void removeDuplicates();
+    void altrnate();
+    void altMerge(SinglyLinked &);
 };
 
 int SinglyLinked::noOfElements()
