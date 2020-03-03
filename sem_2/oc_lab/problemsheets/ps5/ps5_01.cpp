@@ -3,9 +3,8 @@ using namespace std;
 
 class Publications
 {
-    protected:
-        string title;
-        float price;
+    string title;
+    float price;
     public:
         void getData();
         void putData(); 
