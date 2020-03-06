@@ -6,30 +6,52 @@
     <title>Document</title>
 </head>
 <script>
-    func
+    function callback()
+    {
+        form = document.getElementById("myForm");
+        var countries = ["India", "USA", "Canada", "China", "Japan"];
+        for(co of countries)
+            form[4].innerHTML+= "<option>" + co + "</option>";
+    }
+    function validateForm()
+    {
+        form = document.getElementById("myForm")
+        if(form[0].value.length < 5 || form[0].value.length > 12)
+            alert('Enter valid length');
+        if(form[1].value.length < 7 || form[1].value.length > 12)
+            alert('Enter valid length');
+        if(!isNaN(form[2].value))
+            alert('Enter valid Name');
+        if(isNaN(form[5].value))
+            alert('Enter valid zipcode');
+    }
 </script>
 <body onload="callback()">
     <h1>Registration Form</h1>
-    <form action="">
+    <form action="" onsubmit="validateForm()" id="myForm">
         <p>User ID</p>
         <input type="text" id="" required>
         <p>Passeord</p>
         <input type="Password" id="" required>
         <p>Name</p>
-        <input type="text" id="" >
-        <p>Address</p>
         <input type="text" id="" required>
+        <p>Address</p>
+        <input type="text" id="">
         <p>Country</p>
-        <select id="" required></select>
+        <select id=""  required></select>
         <p>Zipcode</p>
+        <input type="text" id="" required>
+        <p>Email</p>
         <input type="email" id="" required>
         <p>Sex</p>
-        <input type="radio" id="rm" value="Male" required>Male
-        <input type="radio" id="rf" value="Female" required>Female
+        <input type="radio" id="rm" value="Male">Male
+        <input type="radio" id="rf" value="Female">Female
         <p>Language</p>
         <input type="checkbox" id="ce" value="English">English
         <input type="checkbox" id="cn" value="Non English">Non English
+        <p>About:</p>
         <textarea name="" id="" cols="30" rows="10" ></textarea>
+        <button onclick="validateForm()">Submit</button>
     </form>
 </body>
 </html>
