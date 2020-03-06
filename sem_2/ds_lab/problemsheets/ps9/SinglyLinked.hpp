@@ -11,7 +11,6 @@ class Node
     Node *next;
 public:
     friend SinglyLinked;
-    friend SinglyLinked*& FrontBackSplit(SinglyLinked &);
     Node() : data(0), next(NULL) {}
     Node(int element) : data(element), next(NULL) {}
     Node(const Node &node) : data(node.data), next(node.next) {}
@@ -32,10 +31,12 @@ public:
     bool delMid(Node);
     bool delEnd();
     bool display();
+    //
     void FrontBackSplit();
     void removeDuplicates();
     void altrnate();
-    void altMerge(SinglyLinked &);
+    SinglyLinked& ShuffleMerge(SinglyLinked &);
+    SinglyLinked& SortedMerge(SinglyLinked &);
 };
 
 int SinglyLinked::noOfElements()
