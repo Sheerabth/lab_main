@@ -10,12 +10,11 @@ SinglyLinked& SinglyLinked::ShuffleMerge(SinglyLinked &S)
     SinglyLinked * result = new SinglyLinked();
     Node *t1 = head;
     Node *t2 = S.head;
-    int count = 0;
     while(t1 != NULL || t2 != NULL)
     {
         Node *temp = new Node();
         Node *t = result->head;
-        if(count % 2 == 0)
+        if(t1->data < t2->data)
             temp->data = t1->data;
         else
             temp->data = t2->data;
@@ -24,7 +23,6 @@ SinglyLinked& SinglyLinked::ShuffleMerge(SinglyLinked &S)
         else
             t->next = temp;
         t = temp;
-        count++;
     }
     while(t1 != NULL)
     {

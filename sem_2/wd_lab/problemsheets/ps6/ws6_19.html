@@ -25,12 +25,13 @@
         }
         function reset(){
             second = 0;
+            write();
         }
         function write()
         {
             var sec = second, min = 0, hour = 0;
             if(sec >= 86400 )
-                sec-=86400;
+                sec %= 86400;
             if(sec >= 3600)
             {
                 hour = parseInt(sec / 3600);

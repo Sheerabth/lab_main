@@ -1,6 +1,6 @@
 #include "SinglyLinked.hpp"
 
-void SinglyLinked::FrontBackSpit()
+void SinglyLinked::FrontBackSplit()
 {
     SinglyLinked *S1 = new SinglyLinked();
     SinglyLinked *S2 = new SinglyLinked();
@@ -35,7 +35,6 @@ void SinglyLinked::FrontBackSpit()
             if(( flag && count == len / 2) || (!flag && count == len / 2 + 1))
                 break;
             count++;
-            }
         }
     }  
     while(t != NULL)

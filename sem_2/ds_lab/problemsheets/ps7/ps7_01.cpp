@@ -12,7 +12,7 @@ class Node
     friend SinglyLinked<T>;
 
 public:
-    Node<T>() : data(0), next(NULL) {}
+    Node<T>() : data(0), next(NULL) {}o
     Node<T>(T element) : data(element), next(NULL) {}
     Node<T>(const Node<T> &node) : data(node.data), next(node.next) {}
 };
@@ -178,16 +178,16 @@ bool SinglyLinked<T>::display()
 
 int main()
 {
-    SinglyLinked <int>S;
-    S.insBeg(5);
-    S.insEnd(10);
-    S.insMid(5,6);
-    S.insMid(6,7);
-    S.insMid(5,8);
+    SinglyLinked <string>S;
+    S.insBeg("Tarun");
+    S.insEnd("Good Boy");
+    // S.insMid();
+    // S.insMid(6,7);
+    // S.insMid(5,8);
     S.display();
     S.delEnd();
     S.display();
-    S.delMid(6);
+    // S.delMid(6);
     S.display();
     S.delBeg();
     S.display();
