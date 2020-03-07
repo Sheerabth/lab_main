@@ -13,43 +13,80 @@
         for(co of countries)
             form[4].innerHTML+= "<option>" + co + "</option>";
     }
-    function validateForm()
+
+    function validateForm(event)
     {
-        form = document.getElementById("myForm")
-        if(form[0].value.length < 5 || form[0].value.length > 12)
-            alert('Enter valid length');
-        if(form[1].value.length < 7 || form[1].value.length > 12)
-            alert('Enter valid length');
-        if(!isNaN(form[2].value))
-            alert('Enter valid Name');
-        if(isNaN(form[5].value))
-            alert('Enter valid zipcode');
+        console.log("HI SHan");
+        var id = event.target.id;
+        var element = document.getElementById(id).value;
+        if(id == "user-id")
+        {
+            if( element.length < 5 || element.length > 12)
+            document.getElementById("error-user").innerHTML = "Invalid Inupt";
+            else
+            document.getElementById("error-user").style.display = "none";
+        }
+        if(id == "pass")
+        {
+            if(element.length < 7 || element.length > 12)
+            document.getElementById("error-pass").innerHTML = "Invalid Inupt";
+            else
+            document.getElementById("error-pass").style.display = "none";
+        }
+        if(id == "name")
+        {
+            if(!NaN(element))
+            document.getElementById("error-name").innerHTML = "Invalid Inupt";
+            else
+            document.getElementById("error-name").style.display = "none";}
+        if(id == "zip")
+        {
+            if(NaN(element))
+            document.getElementById("error-zip").innerHTML = "Invalid Inupt";
+            else
+            document.getElementById("error-zip").style.display = "none";}
+        if(id == "email")
+        {
+            regex = /[a-z0-9.]+@[a-z](.com|.co.in)/
+            if(!regex.test(element))
+            document.getElementById("error-email").innerHTML = "Invalid Inupt";
+            else
+            document.getElementById("error-email").style.display = "none";}
     }
 </script>
 <body onload="callback()">
     <h1>Registration Form</h1>
-    <form action="" onsubmit="validateForm()" id="myForm">
-        <p>User ID</p>
-        <input type="text" id="" required>
-        <p>Passeord</p>
-        <input type="Password" id="" required>
-        <p>Name</p>
-        <input type="text" id="" required>
+    <form action="" id="myForm">
+        <p>User ID</p> <span id="error-user"></span> <br>
+        <input type="text" id="user-id" onkeypress="validateForm(event)" required>
+
+        <p>Password</p> <span id="error-pass"></span> <br>
+        <input type="Password" id="pass" onkeypress=validateForm(event)" required>
+
+        <p>Name</p> <span id="error-name"></span> <br>
+        <input type="text" id="name" onkeypress="validateForm(event)" required>
+
         <p>Address</p>
         <input type="text" id="">
-        <p>Country</p>
-        <select id=""  required></select>
-        <p>Zipcode</p>
-        <input type="text" id="" required>
-        <p>Email</p>
-        <input type="email" id="" required>
-        <p>Sex</p>
-        <input type="radio" id="rm" value="Male">Male
-        <input type="radio" id="rf" value="Female">Female
-        <p>Language</p>
-        <input type="checkbox" id="ce" value="English">English
-        <input type="checkbox" id="cn" value="Non English">Non English
-        <p>About:</p>
+
+        <p>Country</p> <span id="error-coun"></span>
+        <select id="country" required></select>
+
+        <p>Zipcode</p> <span id="error-zip"></span> <br>
+        <input type="text" id="zip" onkeypress="validateForm(event)"" required>
+
+        <p>Email</p> <span id="error-email"></span> <br>
+        <input type="text" id="email" onkeypress="validateForm(event)" required>
+
+        <p>Sex</p> <span id="error-sex"></span>
+        <input type="radio" id="gender" value="Male">Male
+        <input type="radio" id="gender" value="Female">Female
+
+        <p>Language</p> <span id="error-lang"></span>
+        <input type="checkbox" id="lang" value="English">English
+        <input type="checkbox" id="lang" value="Non English">Non English
+
+        <p>About:</p> <span id="error-abt"></span>
         <textarea name="" id="" cols="30" rows="10" ></textarea>
         <button onclick="validateForm()">Submit</button>
     </form>
