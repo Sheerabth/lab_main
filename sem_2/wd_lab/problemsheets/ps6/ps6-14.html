@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #page{
+            border: 1px solid black;
+        }
+        #page td{
+            height: 5px;
+            width: 10px;
+        }
+        #pallete td button{
+            height: 30px;
+            width: 30px;
+        }
+    </style>
+    <script>
+        function callback()
+        {
+            var number;
+            var colorPal = ["red", "black", "blue", "yellow", "green", "pink", "gray"];
+            var pallete = document.getElementById("pallete");
+            var row = document.createElement("tr");
+            for(i = 0; i < 7; i++)
+            {
+                var dat = document.createElement("td");
+                var node = document.createElement("button");
+                node.addEventListener("mousedown",fun);
+                node.setAttribute("id",i);
+                node.style.backgroundColor = colorPal[i];
+                dat.appendChild(node);
+                row.appendChild(dat);
+            }
+            pallete.appendChild(row);
+            var draw = false;
+            var tab = document.getElementById("page");
+            for(i = 0; i < 300; i++)
+            {
+                var row = document.createElement("tr");
+                for(j = 0; j < 400; j++)
+                {
+                    var dat = document.createElement("td");
+                    dat.addEventListener("mousedown",down);
+                    dat.addEventListener("mouseup",up);
+                    dat.addEventListener("mousemove",move);
+                    row.appendChild(dat);
+                }
+                tab.appendChild(row);
+            }
+            function up()
+            {
+                draw = false;
+            }
+            function down()
+            {
+                draw = true;
+            }
+            
+            var number;
+            function fun(event)
+            {
+                number =  Number(event.target.id);   
+            }
+            function move(event)
+            {
+                if(draw)
+                    event.target.style.backgroundColor = colorPal[number];
+            }
+            
+        }
+    </script>
+</head>
+<body onload = "callback()">
+    <h1>Paint</h1>
+    <table id="page" cellspacing="0px"></table>
+    <table id="pallete"></table>
+</body>
+</html>
