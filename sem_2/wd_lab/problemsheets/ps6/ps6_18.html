@@ -1,21 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script>
-        function callback()
-        {
-            var library = [ 
-                { author: 'Bill Gates', title: 'The Road Ahead', libraryID: 1254},
-                { author: 'Steve Jobs', title: 'Walter Isaacson', libraryID: 4264},
-                { author: 'Suzanne Collins', title: 'Mockingjay: The Final Book of The Hunger Games', 
-                libraryID: 3245} ];
+        function callback() {
+            var library = [
+                { author: 'Bill Gates', title: 'The Road Ahead', libraryID: 1254 },
+                { author: 'Steve Jobs', title: 'Walter Isaacson', libraryID: 4264 },
+                { author: 'Suzanne Collins', title: 'Mockingjay: The Final Book of The Hunger Games', libraryID: 3245 }
+            ];
+            for (i = 0; i < 2; i++) {
+                for (j = i + 1; j < 3; j++) {
+                    if (library[i].title > library[j].title) {
+                        var temp = library[i];
+                        library[i] = library[j];
+                        library[j] = temp;
+                    }
+                }
+            }
+            console.log(library);
         }
     </script>
 </head>
+
 <body onload="callback()">
     <p id="result"></p>
 </body>
+
 </html>
