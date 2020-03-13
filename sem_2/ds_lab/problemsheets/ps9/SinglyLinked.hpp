@@ -25,12 +25,12 @@ public:
     SinglyLinked() : head(NULL) {}
     int noOfElements();
     void insBeg(Node);
-    bool insMid(Node, Node);
-    bool insEnd(Node);
-    bool delBeg();
-    bool delMid(Node);
-    bool delEnd();
-    bool display();
+    void insMid(Node, Node);
+    void insEnd(Node);
+    void delBeg();
+    void delMid(Node);
+    void delEnd();
+    void display();
     //
     void FrontBackSplit();
     void removeDuplicates();
@@ -60,7 +60,7 @@ void SinglyLinked::insBeg(Node node)
 }
 
 
-bool SinglyLinked::insMid(Node element, Node node)
+void SinglyLinked::insMid(Node element, Node node)
 {
     Node *ptr = new Node(node);
     Node *t = head;
@@ -68,7 +68,7 @@ bool SinglyLinked::insMid(Node element, Node node)
     if (head == NULL)
     {
         cout << "Linked list is empty\n";
-        return 0;
+        return;
     }
     while (t != NULL)
     {
@@ -86,11 +86,10 @@ bool SinglyLinked::insMid(Node element, Node node)
     }
     else
         cout << "Element not found\n";
-    return 0;
 }
 
 
-bool SinglyLinked::insEnd(Node node)
+void SinglyLinked::insEnd(Node node)
 {
     Node *ptr=new Node(node);
     Node *t = head;
@@ -98,7 +97,7 @@ bool SinglyLinked::insEnd(Node node)
     {
         head = ptr;
         ptr->next = NULL;
-        return 0;
+        return;
     }
     while (t->next != NULL)
     {
@@ -106,31 +105,27 @@ bool SinglyLinked::insEnd(Node node)
     }
     t->next = ptr;
     ptr->next = NULL;
-    return 0;
 }
 
-
-bool SinglyLinked::delBeg()
+void SinglyLinked::delBeg()
 {
     Node *t = head;
     if (head == NULL)
     {
         cout << "Linked list is empty\n";
-        return 0;
+        return;
     }
     head = head->next;
     delete t;
-    return 0;
 }
 
-
-bool SinglyLinked::delMid(Node element)
+void SinglyLinked::delMid(Node element)
 {
     bool found = false;
     if(head == NULL)
     {
         cout << "Linked list is empty\n";
-        return 0;
+        return;
     }
     Node *t=head;
     while(t->next != NULL)
@@ -150,11 +145,9 @@ bool SinglyLinked::delMid(Node element)
     }
     else
         cout << "Element not found or cannot delete element\n";
-    return 0;
 }
 
-
-bool SinglyLinked::delEnd()
+void SinglyLinked::delEnd()
 {
     if(head == NULL)
     {
@@ -166,7 +159,7 @@ bool SinglyLinked::delEnd()
     {
         head = NULL;
         delete t;
-        return 0;
+        return;
     }
     while(t->next->next != NULL)
     {
@@ -177,12 +170,12 @@ bool SinglyLinked::delEnd()
 }
 
 
-bool SinglyLinked::display()
+void SinglyLinked::display()
 {
     if(head == NULL)
     {
         cout << "The linked list is empty\n";
-        return 0;
+        return;
     }
     Node *t=head;
     cout << "The list contents are: \n";

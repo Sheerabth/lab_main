@@ -17,10 +17,10 @@ void SinglyLinked::FrontBackSplit()
         cout << "Only one element. So cant split \n";
         return;
     }
+    Node *t = head;
     else
     {
         bool flag = !(len % 2);
-        Node *t = head;
         int count = 1;
         while(t != NULL)
         {
