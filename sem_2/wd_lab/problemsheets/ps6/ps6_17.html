@@ -7,14 +7,65 @@
     <script>
         function callback()
         {
-            
+            var tab = document.getElementById("inTable");
+            var row = document.createElement("tr");
+            for(i = 0; i < 10; i++)
+            {
+                var dat = document.createElement("td");
+                var node = document.createTextNode(i);
+                dat.appendChild(node);
+                row.appendChild(dat);
+            }
+            tab.appendChild(row);
+            var row = document.createElement("tr");
+            for(i = 0; i < 10; i++)
+            {
+                var dat = document.createElement("td");
+                var node = document.createElement("input");
+                node.setAttribute("type", "number");
+                node.setAttribute("id",i);
+                dat.appendChild(node);
+                row.appendChild(dat);
+            }
+            tab.appendChild(row);
         }
+
+        function eval()
+        {
+            var ouT = document.getElementById("outTable");
+            var arr = [];
+            for(i = 0; i < 10; i++)
+            {
+                arr[i] = document.getElementById(i).value;
+            }
+            for(i = 0; i < 9; i++)
+            {
+                for(j = i + 1; j < 10; j++)
+                {
+                    if(arr[i] > arr[j])
+                    {
+                        var temp = arr[i];
+                        arr[i] = arr[j];
+                        arr[j] = temp;
+                    }
+                }
+            }
+            var row = document.createElement("tr");
+            for(i = 0; i < 10; i++)
+            {
+                var dat = document.createElement("td");
+                var node = document.createTextNode(arr[i]);
+                dat.appendChild(node);
+                row.appendChild(dat);
+            }
+            ouT.appendChild(row);
+        } 
     </script>
 </head>
 <body onload = "callback()">
     <h1>Input Section</h1>
     <table id="inTable"></table>
-    <button onclick="">Sort in Ascending Order</button>
+    <button onclick="eval()">Sort in Ascending Order</button>
     <br><hr><br>
     <h1>Output Section</h1>
     <table id="outTable"></table>
