@@ -7,7 +7,12 @@
     <script>
         function distance()
         {
-            document.getElementById("result").innerHTML = (( parseFloat(document.getElementById("x1")) - parseFloat(document.getElementById("y1")))**2 + (parseFloat(document.getElementById("x2")) - parseFloat(document.getElementById("y2")))**2)**0.5;
+            var x1 = parseFloat(document.getElementById("x1").value)
+            var y1 = parseFloat(document.getElementById("y1").value)
+            var x2 = parseFloat(document.getElementById("x2").value)
+            var y2 = parseFloat(document.getElementById("y2").value)
+            var dist = ((x2 - x1)**2 + (y2 - y1)**2)**0.5;
+            document.getElementById("result").innerHTML = dist
         }
     </script>
 </head>

@@ -1,0 +1,189 @@
+<html>
+	<head>
+		<title> PS 8 1 </title>
+		<style>
+			#contacts
+			{
+				border: 2px solid black;
+				width: 30%;
+			}
+			.contact
+			{
+				border: 1px solid gray;
+				margin: 2%;
+			}
+			#contacts, #form
+			{
+				position: absolute;
+				top: 200px;
+			}
+			#city, #state
+			{
+				display: inline;
+			}
+		</style>
+		<script>
+			function display(objects)
+			{
+				var container = document.getElementById("contacts");
+				container.innerHTML = "";
+				for(var  i = 0; i<objects.length; i++)
+				{
+					var box = document.createElement("div");
+					box.setAttribute("name",objects[i].lastname);
+					box.setAttribute("class", "contact");
+					box.setAttribute("onclick" ,"boxclicked(this)");
+					box.innerHTML = objects[i].firstname + " " + objects[i].lastname;
+					box.expanded = false;
+					container.appendChild(box);
+				}
+			}
+			function getNames()
+			{
+				var xhr = new XMLHttpRequest();
+				xhr.open("GET", "ps8_1.php", true);
+				xhr.send();
+				xhr.onreadystatechange = function()
+				{
+					if(this.readyState == 4 && this.status == 200)
+					{
+						display(JSON.parse(this.responseText));
+					}
+				};
+			}
+			function boxclicked(box)
+			{
+				var lname = box.getAttribute("name");
+				if(!box.expanded)
+				{
+					var xhr = new XMLHttpRequest();
+					xhr.open("GET", `ps8_1.php?lname=${lname}`, true);
+					xhr.send();
+					xhr.onreadystatechange = function()
+					{
+						if(this.readyState == 4 && this.status == 200)
+						{
+							var obj = JSON.parse(this.responseText);
+							box.innerHTML += "<br>Address: " + obj.address + "<br>";
+							box.innerHTML += "Telephone: " + obj.telephone;
+						}
+					};
+					box.expanded = true;
+				}
+				else
+				{
+					var text = box.innerHTML;
+					text = text.substring(0, text.indexOf("<br>"));
+					box.innerHTML = text;
+					box.expanded = false;
+				}
+			}
+			function update(input)
+			{
+				var x = event.which || event.keyCode;
+				if((x>=65 && x<= 90) || x == 8)
+				{
+					var search = input.value;
+					var xhr = new XMLHttpRequest();
+					xhr.open("GET", `ps8_1.php?search=${search}`, true);
+					xhr.send();
+					xhr.onreadystatechange = function()
+					{
+						if(this.readyState == 4 && this.status == 200)
+						{
+							display(JSON.parse(this.responseText));
+						}
+					};
+				}
+			}
+			function newEntry()
+			{
+				document.getElementById("subheading").innerHTML = "Add a new entry";
+				document.getElementById("contacts").style.display = "none";
+				document.getElementById("form").style.display = "block";
+			}
+			function getZip()
+			{
+				var zip = document.getElementById("zip").value;
+				if(zip.length != 5)
+				{
+					document.getElementById("error").innerHTML = " Zip code does not exist";
+					return;
+				}
+				console.log(zip);
+				var xhr = new XMLHttpRequest();
+				var clientKey = "js-EhNfnbD9yVH4c5MNp2FyVVC3DEcPk3QU2yj1jLuZYyLxWEFmzqfxelaIs4bEzelC";
+				var url = "https://www.zipcodeapi.com/rest/"+clientKey+"/info.json/" + zip + "/radians";
+				xhr.open("GET", url, true);
+				xhr.send();
+				xhr.onreadystatechange = function()
+				{
+					if(this.readyState == 4 && this.status == 200)
+					{
+						var obj = JSON.parse(this.responseText);		
+						document.getElementById("city").innerHTML = obj.city;
+						document.getElementById("state").innerHTML = obj.state;
+						document.getElementById("error").innerHTML = "";
+					}
+					if(this.readyState == 4 && this.status == 400)
+					{
+						document.getElementById("error").innerHTML = "Zip code does not exist";
+					}
+				};
+			}
+			function sendForm()
+			{
+				var inputs = document.getElementsByClassName("form");
+				var data = "";
+				data += ("fname="+inputs[0].value);
+				data += ("&lname="+inputs[1].value);
+				data += ("&street="+inputs[2].value);
+				data += ("&city="+inputs[3].innerHTML);
+				data += ("&state="+inputs[4].innerHTML);
+				data += ("&zip="+inputs[5].value);
+				data += ("&tel="+inputs[6].value);
+				const searchExp = /\s/g;
+				data = data.replace(searchExp, '+');
+				console.log(data);
+				var xhr = new XMLHttpRequest();
+				xhr.open("POST", "ps8_1.php", true);
+				xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+				xhr.send(data);
+				xhr.onreadystatechange = function()
+				{
+					if(this.readyState == 4 && this.status == 200)
+					{
+						console.log("Posted successfully");
+						console.log(this.responseText);
+					}
+				};
+			}
+			function showContacts()
+			{
+				document.getElementById("subheading").innerHTML = "Contacts";
+				document.getElementById("contacts").style.display = "block";
+				document.getElementById("form").style.display = "none";
+			}
+		</script>
+	</head>
+	<body onload = "getNames()">
+		<button onclick = "showContacts()"> Address Book </button>
+		<button onclick = "newEntry()"> Add an Entry </button>
+		<p> Search by last name: </p>
+		<input type = "text" onkeyup = "update(this)">
+		<br><p id = "subheading"> Contacts </p><br>
+		<div id = "contacts"> </div>
+		<div id = "form" style = "display:none" > 
+			First Name <input class = "form"><br>
+			Last Name <input class = "form"><br>
+			<b> Address </b><br>
+			Street <input class = "form"> <br>
+			City: <p id = "city" class = "form">City</p><br>
+			State: <p id = "state" class = "form">State</p><br>
+			Zip: <input id = "zip" onchange = "getZip()" class = "form"><span id = "error"></span>
+			<br>
+			Telephone: <input class = "form"><br>
+			<button onclick = "sendForm()" > Submit </button>	
+		</div>
+	</body>
+</html>

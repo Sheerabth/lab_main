@@ -22,7 +22,13 @@
                 }
             }
             console.log(library);
+            var res='';
+            for (i = 0; i < 3; i++) {
+                res += `author: ${library[i].author}, title: ${library[i].title}, libraryID: ${library[i].libraryID}<br/>`
+            }
+            document.getElementById('result').innerHTML = res
         }
+        
     </script>
 </head>
 

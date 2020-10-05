@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-template<class T>
+template <class T>
 class Stack
 {
     int top;
@@ -10,50 +10,49 @@ class Stack
 
 public:
     Stack();
-    void assignSize(int);
-    int push(T);
+    Stack(int);
+    void push(T);
     T pop();
-    int displayFromBottom();
-    int displayFromTop();
+    void displayFromBottom();
+    void displayFromTop();
     int count();
     ~Stack();
 };
 
-template<class T>
+template <class T>
 Stack<T>::Stack()
 {
     top = -1;
     stack = new T[0]();
 }
 
-template<class T>
+template <class T>
 Stack<T>::~Stack()
 {
     delete[] stack;
 }
 
-template<class T>
-void Stack<T>::assignSize(int size)
+template <class T>
+Stack<T>::Stack(int size)
 {
     delete[] stack;
     this->size = size;
     stack = new T[size]();
 }
 
-template<class T>
-int Stack<T>::push(T element)
+template <class T>
+void Stack<T>::push(T element)
 {
     if (top == size - 1)
     {
         cout << "Stack is full\n";
-        return 0;
+        return -1;
     }
     top++;
     stack[top] = element;
-    return 0;
 }
 
-template<class T>
+template <class T>
 T Stack<T>::pop()
 {
     T element;
@@ -67,8 +66,8 @@ T Stack<T>::pop()
     return element;
 }
 
-template<class T>
-int Stack<T>::displayFromBottom()
+template <class T>
+void Stack<T>::displayFromBottom()
 {
     Stack<T> S;
     T element;
@@ -76,9 +75,9 @@ int Stack<T>::displayFromBottom()
     if (top == -1)
     {
         cout << "Stack is empty\n";
-        return 0;
+        return;
     }
-    int local_top=top;
+    int local_top = top;
     while (top != -1)
     {
         element = pop();
@@ -94,11 +93,10 @@ int Stack<T>::displayFromBottom()
         push(element);
     }
     cout << endl;
-    return 0;
 }
 
-template<class T>
-int Stack<T>::displayFromTop()
+template <class T>
+void Stack<T>::displayFromTop()
 {
     Stack<T> S;
     T element;
@@ -106,9 +104,9 @@ int Stack<T>::displayFromTop()
     if (top == -1)
     {
         cout << "Stack is empty\n";
-        return 0;
+        return;
     }
-    int local_top=top;
+    int local_top = top;
     cout << "Displaying the stack from top:\n";
     while (top != -1)
     {
@@ -122,16 +120,12 @@ int Stack<T>::displayFromTop()
         element = S.pop();
         push(element);
     }
-    return 0;
 }
 
-template<class T>
+template <class T>
 int Stack<T>::count()
 {
     if (top == -1)
-    {
-        cout << "Stack is empty\n";
         return 0;
-    }
-    cout << "The number of elements in the stack is " << top + 1 << endl;
+    return top + 1;
 }

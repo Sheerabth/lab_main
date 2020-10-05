@@ -5,6 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .container{
+            float: left;
+            margin: 30px;
+        }
+    </style>
 </head>
 <script>
     function callback() {
@@ -56,38 +62,42 @@
 <body onload="callback()">
     <h1>Registration Form</h1>
     <form action="" id="myForm">
-        <p>User ID</p> <span id="error-user"></span> <br>
-        <input type="text" id="user-id" onblur="validateForm(event)" required>
+        <div class='container'>
+            <p>User ID</p> <span id="error-user"></span> <br>
+            <input type="text" id="user-id" onblur="validateForm(event)" required>
+    
+            <p>Password</p> <span id="error-pass"></span> <br>
+            <input type="Password" id="pass" onblur="validateForm(event)" required>
+    
+            <p>Name</p> <span id="error-name"></span> <br>
+            <input type="text" id="name" onblur="validateForm(event)" required>
+    
+            <p>Address</p>
+            <input type="text" id="">
 
-        <p>Password</p> <span id="error-pass"></span> <br>
-        <input type="Password" id="pass" onblur="validateForm(event)" required>
+            <p>Country</p> <span id="error-coun"></span>
+            <select id="country" required></select>
+        
+            <p>Zipcode</p> <span id="error-zip"></span> <br>
+            <input type="text" id="zip" onblur="validateForm(event)"" required>
+        </div>
+       
+        <div class='container'>
+            <p>Email</p> <span id=" error-email"></span> <br>
+            <input type="text" id="email" onblur="validateForm(event)" required>
 
-        <p>Name</p> <span id="error-name"></span> <br>
-        <input type="text" id="name" onblur="validateForm(event)" required>
+            <p>Sex</p> <span id="error-sex"></span>
+            <input type="radio" id="gender" value="Male">Male
+            <input type="radio" id="gender" value="Female">Female
 
-        <p>Address</p>
-        <input type="text" id="">
+            <p>Language</p> <span id="error-lang"></span>
+            <input type="checkbox" id="lang" value="English">English
+            <input type="checkbox" id="lang" value="Non English">Non English
 
-        <p>Country</p> <span id="error-coun"></span>
-        <select id="country" required></select>
-
-        <p>Zipcode</p> <span id="error-zip"></span> <br>
-        <input type="text" id="zip" onblur="validateForm(event)"" required>
-
-        <p>Email</p> <span id=" error-email"></span> <br>
-        <input type="text" id="email" onblur="validateForm(event)" required>
-
-        <p>Sex</p> <span id="error-sex"></span>
-        <input type="radio" id="gender" value="Male">Male
-        <input type="radio" id="gender" value="Female">Female
-
-        <p>Language</p> <span id="error-lang"></span>
-        <input type="checkbox" id="lang" value="English">English
-        <input type="checkbox" id="lang" value="Non English">Non English
-
-        <p>About:</p> <span id="error-abt"></span>
-        <textarea name="" id="" cols="30" rows="10"></textarea>
-        <button>Submit</button>
+            <p>About:</p> <span id="error-abt"></span>
+            <textarea name="" id="" cols="30" rows="10"></textarea> <br/> <br/>
+            <button>Submit</button>
+        </div>
     </form>
 </body>
 
