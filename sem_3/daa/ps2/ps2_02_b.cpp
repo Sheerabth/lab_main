@@ -244,7 +244,7 @@ int main() {
     cout << "Inserting the elements\n";
     for (int i = 0; i < no; i++)
         A.insertNode(inp[i]);
-    A.inOrder();
+    A.print2DUtil();
     A.delOnlyLeft();
-    A.inOrder();
+    A.print2DUtil();
 }

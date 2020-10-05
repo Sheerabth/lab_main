@@ -1,0 +1,1 @@
+truncate table 19pw33_employee_data;

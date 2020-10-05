@@ -1,5 +1,6 @@
 #include<bits/stdc++.h> 
 #include <vector>
+#define COUNT 10
 using namespace std;
 
 class AVL;
@@ -33,6 +34,8 @@ class AVL{
         void inOrder();
         void inOrder(Node*);
         void deleteMinNode();
+        void print2DUtil();
+        void print2DUtil(Node*, int);
 };
 
 int max(int a, int b) {

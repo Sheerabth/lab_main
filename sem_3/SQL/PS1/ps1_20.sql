@@ -1,0 +1,1 @@
+alter table 19pw33_employee_data add check (Salary >= 5000 and Salary <=50000);

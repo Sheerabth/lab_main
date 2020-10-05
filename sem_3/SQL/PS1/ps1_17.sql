@@ -1,0 +1,1 @@
+create table 19pw33_CBE_employees as select * from 19pw33_employee_data where City = 'Coimbatore';

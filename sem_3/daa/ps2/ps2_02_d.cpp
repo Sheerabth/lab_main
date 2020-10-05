@@ -1,5 +1,6 @@
 #include<bits/stdc++.h> 
 #include <vector>
+#define COUNT 10
 using namespace std;
 
 class AVL;
@@ -33,6 +34,8 @@ class AVL{
         void inOrder(Node*);
         bool findNode(const int);
         Node* findNode(Node*, int, bool&);
+        void print2DUtil();
+        void print2DUtil(Node*, int);
 };
 
 int max(int a, int b) {
@@ -156,6 +159,27 @@ Node* AVL::findNode(Node* node, int val, bool& found) {
     else if (val < node->key)
         node->left = findNode(node->left, val, found);
     return node;
+}
+
+void AVL::print2DUtil() {
+    print2DUtil(rootNode, 0);
+}
+
+void AVL::print2DUtil(Node *root, int space)
+{
+    if (root == NULL)
+        return;
+
+    space += COUNT;
+
+    print2DUtil(root->right, space);
+    cout<<endl;
+    
+    for (int i = COUNT; i < space; i++)
+        cout<<" ";
+    cout<<root->key <<"\n";
+
+    print2DUtil(root->left, space);
 }
 
 int main() {

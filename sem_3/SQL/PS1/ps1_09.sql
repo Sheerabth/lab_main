@@ -1,0 +1,1 @@
+create table 19pw33_dup_employee as select * from 19pw33_employee;

@@ -1,0 +1,1 @@
+create table 19pw33_Subset_employee as select EID, Name, Designation, Phone_number from 19pw33_employee_data;

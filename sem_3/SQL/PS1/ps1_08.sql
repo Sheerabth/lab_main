@@ -1,0 +1,1 @@
+alter table 19pw33_employee drop column Last_name;
