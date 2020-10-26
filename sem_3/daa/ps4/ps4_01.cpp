@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -9,9 +9,9 @@ int MergeSort (vector<int>& A) {
     int count = 0;
     int n = A.size();
     if (n > 1) {
-        auto first = A.begin(); 
-        auto mid = A.begin() + n/2;
-        auto end = A.end(); 
+        vector<int> :: iterator first = A.begin(); 
+        vector<int> :: iterator mid = A.begin() + n/2;
+        vector<int> :: iterator end = A.end(); 
         vector<int> B(first, mid);
         vector<int> C(mid, end);
         count += MergeSort(B);
@@ -43,6 +43,14 @@ int Merge (vector<int>& B, vector<int>& C, vector<int>& A) {
 }
 
 int main() {
-    vector<int> v = {8, 4, 2, 1};
-    cout << MergeSort(v) << " is number of inversions\n";
+    int length, number;
+    vector<int> vec;
+    cout << "Enter the number of elements: ";
+    cin >> length;
+    cout << "Enter the elements\n";
+    for (int i = 0; i < length; i++) {
+        cin >> number;
+        vec.push_back(number);
+    }
+    cout << "The number of inversions are " << MergeSort(vec) << endl;
 }

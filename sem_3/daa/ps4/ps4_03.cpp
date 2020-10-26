@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 using namespace std;
 
 int wrapper (vector<int>&, int);
@@ -35,6 +36,16 @@ int findSpl (vector<int>& v, int k, int index, int start, int end) {
 }
 
 int main() {
-    vector<int> v = {1, 2, 3, 4};
-    cout << wrapper(v, 3);
+    int length, number, k;
+    vector<int> vec;
+    cout << "Enter the number of elements: ";
+    cin >> length;
+    cout << "Enter the elements\n";
+    for (int i = 0; i < length; i++) {
+        cin >> number;
+        vec.push_back(number);
+    }
+    cout << "Enter the number: ";
+    cin >> k;
+    cout << "The speciality of the sequence is" << wrapper(vec, k) << endl;
 }
