@@ -1,0 +1,133 @@
+USE exam33;
+# SET foreign_key_checks = 0;
+# drop table Customer;
+# drop table Account;
+# drop table Transaction;
+# SET foreign_key_checks = 1;
+# CREATE TABLE Customer(
+# CustomerId VARCHAR(3),
+# CustomerName VARCHAR(20) UNIQUE,
+# DateOfBirth DATE,
+# Gender CHAR,
+# City VARCHAR(20),
+# CONSTRAINT pkey_customer PRIMARY KEY (CustomerId),
+# CONSTRAINT name_cons CHECK (),
+# CONSTRAINT age_cons CHECK(YEAR(CURRENT_DATE) - YEAR(DateOfBirth) > 18),
+# CONSTRAINT city_cons CHECK(),
+# CONSTRAINT gender_cons CHECK(Gender in ('M', 'F'))
+# );
+
+CREATE TABLE Customer
+(
+    CustomerId   VARCHAR(20),
+    CustomerName VARCHAR(30),
+    DateOfBirth  DATE,
+    Gender       CHAR,
+    City         VARCHAR(30),
+    CONSTRAINT customerId_pk PRIMARY KEY (CustomerId),
+    CONSTRAINT customerId_check CHECK ( CustomerId LIKE 'C%'),
+    CONSTRAINT customerName_unique UNIQUE (CustomerName),
+    CONSTRAINT customerName_check CHECK ( City REGEXP '^[A-Z ]+$'),
+    CONSTRAINT gender_check CHECK ( Gender IN ('M', 'F') ),
+    CONSTRAINT city_check CHECK ( City REGEXP '^[A-Z]')
+);
+
+ALTER TABLE Customer
+    ADD
+        CONSTRAINT age_check CHECK (YEAR(CURRENT_DATE) - YEAR(DateOfBirth) > 18);
+
+CREATE TABLE IF NOT EXISTS Account
+(
+    CustomerId    VARCHAR(3),
+    AccountType   CHAR,
+    OpeningDate   DATE,
+    InitialAmount NUMERIC(4),
+    CONSTRAINT account_pk_check PRIMARY KEY (CustomerId, AccountType),
+    CONSTRAINT account_fk_check FOREIGN KEY (CustomerId) REFERENCES Customer (CustomerId),
+    CONSTRAINT account_openingdate_check CHECK (YEAR(OpeningDate) > 2001),
+    CONSTRAINT account_initalamount_check CHECK (InitialAmount BETWEEN 1000 AND 5000)
+);
+
+CREATE TABLE IF NOT EXISTS Transaction
+(
+    CustomerId        VARCHAR(3),
+    Deposit           NUMERIC(4),
+    Withdrawal        NUMERIC(4),
+    DateofTransaction DATE,
+    CONSTRAINT transaction_pk_check PRIMARY KEY (CustomerId, DateofTransaction),
+    CONSTRAINT transaction_fk_check FOREIGN KEY (CustomerId) REFERENCES Customer (CustomerId),
+    CONSTRAINT transaction_cusomerId_check CHECK ( CustomerId LIKE 'C%')
+);
+
+INSERT INTO Customer
+VALUES ('C01', 'VINITH', STR_TO_DATE('02/12/1980', '%d/%m/%Y'), 'F', 'Cbe'),
+       ('C02', 'MONIKA', STR_TO_DATE('12/04/1977', '%d/%m/%Y'), 'F', 'Chenni'),
+       ('C03', 'VASANTHI', STR_TO_DATE('10/10/1978', '%d/%m/%Y'), 'M', 'Bombay'),
+       ('C04', 'NITHIN', STR_TO_DATE('01/05/1970', '%d/%m/%Y'), 'M', 'Cbe');
+
+INSERT INTO Account
+VALUES ('C01', 'S', STR_TO_DATE('10/10/2001', '%d/%m/%Y'), 1000),
+       ('C02', 'S', STR_TO_DATE('10/11/2001', '%d/%m/%Y'), 2000),
+       ('C03', 'C', STR_TO_DATE('19/10/2001', '%d/%m/%Y'), 4000),
+       ('C04', 'C', STR_TO_DATE('29/01/2002', '%d/%m/%Y'), 2000),
+       ('C04', 'S', STR_TO_DATE('29/01/2002', '%d/%m/%Y'), 2000);
+
+
+INSERT INTO Transaction
+VALUES ('C01', 1000, NULL, STR_TO_DATE('01/01/2008', '%d/%m/%Y')),
+       ('C02', 2000, NULL, STR_TO_DATE('02/01/2008', '%d/%m/%Y')),
+       ('C03', NULL, 500, STR_TO_DATE('02/01/2008', '%d/%m/%Y')),
+       ('C01', NULL, 2000, STR_TO_DATE('03/01/2008', '%d/%m/%Y')),
+       ('C02', 1000, NULL, STR_TO_DATE('03/01/2008', '%d/%m/%Y')),
+       ('C03', 2000, NULL, STR_TO_DATE('03/01/2008', '%d/%m/%Y')),
+       ('C01', NULL, 1000, STR_TO_DATE('04/01/2008', '%d/%m/%Y')),
+       ('C03', NULL, 5000, STR_TO_DATE('04/01/2008', '%d/%m/%Y')),
+       ('C02', NULL, 1200, STR_TO_DATE('05/01/2008', '%d/%m/%Y')),
+       ('C03', 1200, NULL, STR_TO_DATE('05/01/2008', '%d/%m/%Y'));
+
+# 1
+SELECT CustomerName
+FROM Customer C
+         LEFT OUTER JOIN Transaction T on C.CustomerId = T.CustomerId
+WHERE DateofTransaction IS NULL;
+
+# 2
+SELECT C.CustomerId, C.CustomerName, SUM(T.Deposit), SUM(T.Withdrawal)
+FROM Customer C
+         INNER JOIN Transaction T on C.CustomerId = T.CustomerId
+GROUP BY C.CustomerId;
+
+# 3
+SELECT SUM(Deposit) - SUM(Withdrawal) AS Balance
+FROM Transaction
+WHERE CustomerId = 'C01'
+  AND DateofTransaction < STR_TO_DATE('06/01/2008', '%d/%m/%Y');
+
+# 4
+SELECT C.CustomerName, COUNT(*)
+FROM Customer C
+         INNER JOIN Transaction T on C.CustomerId = T.CustomerId
+GROUP BY C.CustomerId
+ORDER BY COUNT(*) DESC
+LIMIT 1;
+
+# 5
+SELECT C.CustomerId, C.CustomerName, YEAR(CURRENT_DATE) - YEAR(C.DateOfBirth) AS MinAge
+FROM Customer C
+         INNER JOIN Account A on C.CustomerId = A.CustomerId
+ORDER BY MinAge
+LIMIT 1;
+
+# 6
+ALTER TABLE Customer
+    ADD FinalBalance NUMERIC(4) DEFAULT 0;
+
+UPDATE Customer C
+SET FinalBalance = (
+    SELECT SUM(Deposit) - SUM(Withdrawal) as 'FinalBalance'
+    FROM Transaction
+    WHERE CustomerId = C.CustomerId
+    GROUP BY CustomerId
+)
+WHERE FinalBalance = 0;
+

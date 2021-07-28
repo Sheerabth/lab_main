@@ -1,5 +1,4 @@
 #include <iostream>
-#include <algorithm>
 #include <vector>
 using namespace std;
 
@@ -36,38 +35,10 @@ void MergeSort (vector<int>& A) {
     }
 }
 
-bool getIndex(vector<int> v, int K) 
-{ 
-    vector<int> :: iterator it = find(v.begin(), v.end(), K); 
-  
-    if (it != v.end()) 
-        return true;
- 
-    return false;
-} 
-
-int filter (vector<int>& vec, int x){
-    MergeSort(vec);
-    if (x > vec.back())
-        return x + 1;
-    x = x + 1;
-    for (int available = 0; available = getIndex(vec, x); x++);
-
-    return x;
-}
-
 int main() {
-    int length, number, x;
-    vector<int> vec;
-    cout << "Enter the number of elements: ";
-    cin >> length;
-    cout << "Enter the elements\n";
-    for (int i = 0; i < length; i++) {
-        cin >> number;
-        vec.push_back(number);
-    }
-    cout << "Enter the number: ";
-    cin >> x;
-    int result = filter(vec, x);
-    cout << result << " is the result\n";
+    vector<int> v = {10, 12, 7, 8, 9, 15, 16, 17, 36, 38, 41, 44};
+    MergeSort(v);
+    for (int i = 0; i < v.size(); i++)
+        cout << v[i] << " ";
+    cout << endl;
 }

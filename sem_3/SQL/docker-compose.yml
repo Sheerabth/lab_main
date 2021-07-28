@@ -1,0 +1,32 @@
+version: '3.3'
+services:
+  mysql:
+    container_name: MySQL
+    image: mysql
+    restart: always    # always makes it start immediately when PC/docker daemon starts up
+    environment:
+      MYSQL_DATABASE: 'database'
+      MYSQL_USER: 'username'
+      MYSQL_PASSWORD: 'somerandompassword'
+      MYSQL_ROOT_PASSWORD: 'root_password'
+    ports:
+      - '3306:3306'    # mapping a port from Host to Container
+    volumes:
+      - mysql-db:/var/lib/mysql # making a volume to permanatly store data
+
+#  postgres:
+#    container_name: PostgreSQL
+#    restart: always
+#    image: "postgres"
+#    environment:
+#      POSTGRES_USER: 'username'
+#      POSTGRES_PASSWORD: 'somerandompassword'
+#      POSTGRES_DB: database
+#    ports:
+#      - '5432:5432'
+#    volumes:
+#      -   postgres-db:/var/lib/postgresql/data/
+
+volumes:
+#  postgres-db:
+  mysql-db:

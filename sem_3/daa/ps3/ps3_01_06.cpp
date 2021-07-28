@@ -10,7 +10,6 @@ public:
     void display();
     void depthFirstTraversal();
     void BFS(int);
-    void DFS(int);
 };
 
 void Graph::insert(int value, set<int> connectedNodes)
@@ -34,23 +33,6 @@ void Graph::insert(int value, set<int> connectedNodes)
     }
 }
 
-// void Graph :: BFS () {
-//     set<int> visited;
-//     queue<int> q;
-
-//     int initialNode = adjacencyList.begin()->first;
-//     q.push(initialNode);
-//     visited.insert(initialNode);
-    
-//     while (!q.empty()) {
-//         int node = q.front();
-//         cout << node << " ";
-//         q.pop();
-        
-//     }
-
-// }
-
 void Graph::BFS(int node)
 {
     set<int> visited;
@@ -70,30 +52,6 @@ void Graph::BFS(int node)
             if(visited.find(connectedNode) == visited.end()){
                 visited.insert(connectedNode);
                 q.push(connectedNode);
-            }
-        }
-    }
-}
-
-void Graph::DFS(int node)
-{
-    set<int> visited;
-    stack<int> s;
-
-    visited.insert(node);
-    s.push(node);
-
-    while (!s.empty())
-    {
-        node = s.top();
-        cout << node << " ";
-        s.pop();
-
-        map<int, set<int>>::iterator iteratorToSrc = adjacencyList.find(node);
-        for (int connectedNode : iteratorToSrc->second){
-            if(visited.find(connectedNode) == visited.end()){
-                visited.insert(connectedNode);
-                s.push(connectedNode);
             }
         }
     }
