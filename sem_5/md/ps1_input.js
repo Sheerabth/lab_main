@@ -6,7 +6,7 @@ db.createCollection("books")
 db.publishers.insertMany([
     {
       "publisher_id": "p0",
-      "name": "Prentice HallJaico Publishing House",
+      "name": "Prentice Hall",
       "address": {
         "country": "Albania",
         "city": "La Guajira",
@@ -68,8 +68,8 @@ db.publishers.insertMany([
       "publisher_id": "p6",
       "name": "Aleph Book Company",
       "address": {
-        "country": "Andorra",
-        "city": "PO Boxes",
+        "country": "India",
+        "city": "Delhi",
         "pincode": "AD500"
       },
       "annual_revenue": 40000
@@ -102,7 +102,7 @@ db.books.insertMany([
           "author_name": "C1RFYGKEX5",
           "university_name": "u6",
           "university_city": "c6",
-          "author_country": "Angola",
+          "author_country": "India",
           "author_contact_no": "3425128205"
         },
         {
@@ -110,15 +110,14 @@ db.books.insertMany([
           "author_name": "1O2D550G83",
           "university_name": "u5",
           "university_city": "c5",
-          "author_country": "Andorra",
+          "author_country": "India",
           "author_contact_no": "0456452402"
         }
       ],
       "category": [
-        "Biology",
+        "Science",
         "Fiction",
         "Chemistry",
-        "Biology"
       ],
       "edition": 4,
       "rating": 4,
@@ -140,7 +139,7 @@ db.books.insertMany([
         }
       ],
       "category": [
-        "Math"
+        "Maths"
       ],
       "edition": 1,
       "rating": 1,
@@ -150,19 +149,19 @@ db.books.insertMany([
     },
     {
       "book_id": "b2",
-      "title": "DPR07T82VQ",
+      "title": "Database system concepts",
       "authors": [
         {
           "author_id": "a7",
           "author_name": "1O2D550G83",
           "university_name": "u5",
           "university_city": "c5",
-          "author_country": "Andorra",
+          "author_country": "India",
           "author_contact_no": "0456452402"
         },
         {
           "author_id": "a27",
-          "author_name": "2KZ16UK3C2",
+          "author_name": "Abraham silberschatz",
           "university_name": "u9",
           "university_city": "c9",
           "author_country": "Albania",
@@ -186,15 +185,14 @@ db.books.insertMany([
         }
       ],
       "category": [
-        "Biology",
-        "Biology",
+        "Science",
         "Fiction",
         "Programming"
       ],
       "edition": 4,
       "rating": 4,
-      "price": 825,
-      "year": 2021,
+      "price": 225,
+      "year": 1998,
       "publisher_id": "p4"
     },
     {
@@ -211,7 +209,7 @@ db.books.insertMany([
         }
       ],
       "category": [
-        "Math"
+        "Maths"
       ],
       "edition": 1,
       "rating": 1,
@@ -257,7 +255,7 @@ db.books.insertMany([
         }
       ],
       "category": [
-        "Biology",
+        "Science",
         "Chemistry",
         "Fiction",
         "Programming"
@@ -331,7 +329,7 @@ db.books.insertMany([
       "category": [
         "Fiction",
         "Programming",
-        "Math"
+        "Maths"
       ],
       "edition": 3,
       "rating": 3,
@@ -348,7 +346,7 @@ db.books.insertMany([
           "author_name": "C1RFYGKEX5",
           "university_name": "u6",
           "university_city": "c6",
-          "author_country": "Angola",
+          "author_country": "India",
           "author_contact_no": "3425128205"
         }
       ],
@@ -401,17 +399,17 @@ db.books.insertMany([
       ],
       "edition": 1,
       "rating": 1,
-      "price": 984,
+      "price": 1384,
       "year": 2014,
       "publisher_id": "p2"
     },
     {
       "book_id": "b10",
-      "title": "AQHPREP2FI",
+      "title": "Understanding databases",
       "authors": [
         {
           "author_id": "a27",
-          "author_name": "2KZ16UK3C2",
+          "author_name": "Abraham silberschatz",
           "university_name": "u9",
           "university_city": "c9",
           "author_country": "Albania",
@@ -427,12 +425,12 @@ db.books.insertMany([
         }
       ],
       "category": [
-        "Biology",
-        "Math"
+        "Science",
+        "Maths"
       ],
       "edition": 2,
       "rating": 2,
-      "price": 1822,
+      "price": 325,
       "year": 2016,
       "publisher_id": "p6"
     },
@@ -467,13 +465,13 @@ db.books.insertMany([
       ],
       "category": [
         "Fiction",
-        "Math",
+        "Maths",
         "Programming"
       ],
       "edition": 3,
       "rating": 3,
       "price": 1598,
-      "year": 2022,
+      "year": 1996,
       "publisher_id": "p1"
     },
     {
@@ -530,7 +528,7 @@ db.books.insertMany([
       ],
       "category": [
         "Programming",
-        "Biology"
+        "Science"
       ],
       "edition": 2,
       "rating": 2,
@@ -555,13 +553,12 @@ db.books.insertMany([
           "author_name": "1O2D550G83",
           "university_name": "u5",
           "university_city": "c5",
-          "author_country": "Andorra",
+          "author_country": "India",
           "author_contact_no": "0456452402"
         }
       ],
       "category": [
-        "Biology",
-        "Biology"
+        "Science",
       ],
       "edition": 2,
       "rating": 2,
@@ -599,8 +596,7 @@ db.books.insertMany([
         }
       ],
       "category": [
-        "Math",
-        "Fiction",
+        "Maths",
         "Fiction"
       ],
       "edition": 3,
@@ -634,14 +630,14 @@ db.books.insertMany([
           "author_name": "1O2D550G83",
           "university_name": "u5",
           "university_city": "c5",
-          "author_country": "Andorra",
+          "author_country": "India",
           "author_contact_no": "0456452402"
         }
       ],
       "category": [
         "Programming",
         "Fiction",
-        "Biology"
+        "Science"
       ],
       "edition": 3,
       "rating": 3,
@@ -658,7 +654,7 @@ db.books.insertMany([
           "author_name": "1O2D550G83",
           "university_name": "u5",
           "university_city": "c5",
-          "author_country": "Andorra",
+          "author_country": "India",
           "author_contact_no": "0456452402"
         },
         {
@@ -687,15 +683,14 @@ db.books.insertMany([
         }
       ],
       "category": [
-        "Biology",
-        "Programming",
+        "Science",
         "Fiction",
         "Programming"
       ],
       "edition": 4,
       "rating": 4,
       "price": 533,
-      "year": 2022,
+      "year": 1996,
       "publisher_id": "p0"
     },
     {
@@ -736,15 +731,14 @@ db.books.insertMany([
         }
       ],
       "category": [
-        "Math",
         "Programming",
         "Fiction",
-        "Math"
+        "Maths"
       ],
       "edition": 4,
       "rating": 4,
       "price": 529,
-      "year": 2022,
+      "year": 1996,
       "publisher_id": "p2"
     },
     {
@@ -805,7 +799,7 @@ db.books.insertMany([
         }
       ],
       "category": [
-        "Biology"
+        "Science"
       ],
       "edition": 1,
       "rating": 1,
@@ -827,7 +821,7 @@ db.books.insertMany([
         }
       ],
       "category": [
-        "Math"
+        "Maths"
       ],
       "edition": 1,
       "rating": 1,
@@ -849,12 +843,12 @@ db.books.insertMany([
         }
       ],
       "category": [
-        "Math"
+        "Maths"
       ],
       "edition": 1,
       "rating": 1,
       "price": 1331,
-      "year": 2021,
+      "year": 1998,
       "publisher_id": "p2"
     },
     {
@@ -887,14 +881,13 @@ db.books.insertMany([
         }
       ],
       "category": [
-        "Math",
-        "Math",
+        "Maths",
         "Fiction"
       ],
       "edition": 3,
       "rating": 3,
       "price": 852,
-      "year": 2024,
+      "year": 1995,
       "publisher_id": "p1"
     },
     {
@@ -934,7 +927,7 @@ db.books.insertMany([
       "edition": 3,
       "rating": 3,
       "price": 1838,
-      "year": 2021,
+      "year": 1998,
       "publisher_id": "p1"
     },
     {
@@ -956,7 +949,7 @@ db.books.insertMany([
       "edition": 1,
       "rating": 1,
       "price": 2959,
-      "year": 2023,
+      "year": 1997,
       "publisher_id": "p3"
     },
     {
@@ -1026,7 +1019,7 @@ db.books.insertMany([
       ],
       "category": [
         "Chemistry",
-        "Math"
+        "Maths"
       ],
       "edition": 2,
       "rating": 2,
@@ -1036,7 +1029,7 @@ db.books.insertMany([
     },
     {
       "book_id": "b30",
-      "title": "JV00V5ZHEJ",
+      "title": "Modern Database",
       "authors": [
         {
           "author_id": "a19",
@@ -1048,7 +1041,7 @@ db.books.insertMany([
         },
         {
           "author_id": "a27",
-          "author_name": "2KZ16UK3C2",
+          "author_name": "Abraham silberschatz",
           "university_name": "u9",
           "university_city": "c9",
           "author_country": "Albania",
@@ -1057,12 +1050,12 @@ db.books.insertMany([
       ],
       "category": [
         "Chemistry",
-        "Biology"
+        "Science"
       ],
       "edition": 2,
       "rating": 2,
       "price": 745,
-      "year": 2021,
+      "year": 1998,
       "publisher_id": "p5"
     },
     {
@@ -1071,7 +1064,7 @@ db.books.insertMany([
       "authors": [
         {
           "author_id": "a27",
-          "author_name": "2KZ16UK3C2",
+          "author_name": "Abraham silberschatz",
           "university_name": "u9",
           "university_city": "c9",
           "author_country": "Albania",
@@ -1103,10 +1096,9 @@ db.books.insertMany([
         }
       ],
       "category": [
-        "Biology",
+        "Science",
         "Fiction",
-        "Biology",
-        "Math"
+        "Maths"
       ],
       "edition": 4,
       "rating": 4,
@@ -1152,15 +1144,12 @@ db.books.insertMany([
         }
       ],
       "category": [
-        "Programming",
-        "Programming",
-        "Programming",
-        "Math"
+        "Maths"
       ],
       "edition": 4,
       "rating": 4,
       "price": 722,
-      "year": 2024,
+      "year": 1995,
       "publisher_id": "p2"
     },
     {
@@ -1182,7 +1171,7 @@ db.books.insertMany([
       "edition": 1,
       "rating": 1,
       "price": 798,
-      "year": 2023,
+      "year": 1997,
       "publisher_id": "p0"
     },
     {
@@ -1208,7 +1197,6 @@ db.books.insertMany([
       ],
       "category": [
         "Fiction",
-        "Fiction"
       ],
       "edition": 2,
       "rating": 2,
@@ -1238,13 +1226,13 @@ db.books.insertMany([
         }
       ],
       "category": [
-        "Math",
-        "Biology"
+        "Maths",
+        "Science"
       ],
       "edition": 2,
       "rating": 2,
       "price": 850,
-      "year": 2023,
+      "year": 1997,
       "publisher_id": "p3"
     },
     {
@@ -1261,12 +1249,12 @@ db.books.insertMany([
         }
       ],
       "category": [
-        "Math"
+        "Maths"
       ],
       "edition": 1,
       "rating": 1,
       "price": 1850,
-      "year": 2021,
+      "year": 1998,
       "publisher_id": "p0"
     },
     {
@@ -1307,15 +1295,13 @@ db.books.insertMany([
         }
       ],
       "category": [
-        "Biology",
-        "Programming",
-        "Programming",
+        "Science",
         "Programming"
       ],
       "edition": 4,
       "rating": 4,
       "price": 725,
-      "year": 2024,
+      "year": 1995,
       "publisher_id": "p0"
     },
     {
@@ -1358,8 +1344,7 @@ db.books.insertMany([
       "category": [
         "Programming",
         "Fiction",
-        "Fiction",
-        "Biology"
+        "Science"
       ],
       "edition": 4,
       "rating": 4,
@@ -1381,7 +1366,7 @@ db.books.insertMany([
         }
       ],
       "category": [
-        "Math"
+        "Maths"
       ],
       "edition": 1,
       "rating": 1,
@@ -1427,9 +1412,8 @@ db.books.insertMany([
         }
       ],
       "category": [
-        "Math",
+        "Maths",
         "Programming",
-        "Chemistry",
         "Chemistry"
       ],
       "edition": 4,
@@ -1460,7 +1444,7 @@ db.books.insertMany([
         }
       ],
       "category": [
-        "Math",
+        "Maths",
         "Programming"
       ],
       "edition": 2,
@@ -1500,7 +1484,7 @@ db.books.insertMany([
       ],
       "category": [
         "Chemistry",
-        "Math",
+        "Maths",
         "Programming"
       ],
       "edition": 3,
@@ -1523,7 +1507,7 @@ db.books.insertMany([
         }
       ],
       "category": [
-        "Biology"
+        "Science"
       ],
       "edition": 1,
       "rating": 1,
@@ -1562,13 +1546,12 @@ db.books.insertMany([
       ],
       "category": [
         "Programming",
-        "Programming",
         "Fiction"
       ],
       "edition": 3,
       "rating": 3,
       "price": 2916,
-      "year": 2023,
+      "year": 1997,
       "publisher_id": "p3"
     },
     {
@@ -1609,15 +1592,15 @@ db.books.insertMany([
         }
       ],
       "category": [
-        "Biology",
-        "Math",
+        "Science",
+        "Maths",
         "Fiction",
         "Chemistry"
       ],
       "edition": 4,
       "rating": 4,
       "price": 1280,
-      "year": 2022,
+      "year": 1996,
       "publisher_id": "p6"
     },
     {
@@ -1651,13 +1634,12 @@ db.books.insertMany([
       ],
       "category": [
         "Fiction",
-        "Programming",
         "Programming"
       ],
       "edition": 3,
       "rating": 3,
       "price": 1493,
-      "year": 2023,
+      "year": 1997,
       "publisher_id": "p6"
     },
     {
@@ -1682,13 +1664,12 @@ db.books.insertMany([
         }
       ],
       "category": [
-        "Biology",
-        "Biology"
+        "Science"
       ],
       "edition": 2,
       "rating": 2,
       "price": 1935,
-      "year": 2024,
+      "year": 1995,
       "publisher_id": "p1"
     },
     {
@@ -1729,8 +1710,7 @@ db.books.insertMany([
         }
       ],
       "category": [
-        "Fiction",
-        "Math",
+        "Maths",
         "Fiction",
         "Chemistry"
       ],
@@ -1772,5 +1752,3 @@ db.books.insertMany([
       "publisher_id": "p5"
     }
   ])
-
--- 1
