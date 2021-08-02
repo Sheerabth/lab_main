@@ -37,6 +37,19 @@ db.books.find({"year": {$gt: 2000}}, {"title": 1, "edition": 1, "price": 1})
 db.books.count({rating: {$gt: 3}})
 
 // 13
+db.books.aggregate([
+    {$unwind: "$authors"},
+    {
+        $group: {
+            _id: "$authors.author_id",
+            number_of_books: {$sum: 1},
+            workplace: {
+                $first:
+                "$authors.author_country"
+            }
+        }
+    },
+])
 
 // 14
 db.books.aggregate([{
@@ -73,4 +86,26 @@ db.publishers.aggregate([
 ])
 
 // 18
-db.publishers.aggregate({)}
+db.publishers.aggregate([
+    {
+        $lookup:
+        {
+           from: "books",
+           localField: "publisher_id",
+           foreignField: "publisher_id",
+           as: "bookDetails"
+        }
+    },
+    {
+        $unwind: "$bookDetails"
+    },
+    {
+        $group: {
+            _id: "$publisher_id",
+            number_of_books: {$sum: 1},
+            name: { $first: "$name" },
+            address: { $first: "$address" },
+            annualRevenue: { $first: "$annual_revenue" },
+        }
+    }
+])
